@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import json
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Iterator
 
@@ -114,6 +115,56 @@ def iter_source_files(spec: SourceSpec, config: Config) -> Iterator[Path]:
     yield resolved
 
 
+@dataclass(frozen=True)
+class IntakeColumn:
+    """One column an export is expected to carry.
+
+    ``name`` is the header written into the intake template. Connectors accept
+    several spellings for most fields (matching is separator- and
+    case-insensitive), so this is the recommended spelling rather than the only
+    one that will load.
+    """
+
+    name: str
+    description: str
+    example: str = ""
+    required: bool = False
+
+
+@dataclass(frozen=True)
+class IntakeSheet:
+    """One export an analyst collects at the start of an audit.
+
+    Connectors declare these so the intake template is generated from the code
+    that actually reads the data. A column cannot drift out of the template
+    without the connector changing too.
+    """
+
+    key: str
+    title: str
+    source_type: str
+    export_from: str
+    columns: tuple[IntakeColumn, ...]
+    #: ``core`` sources carry the analysis; without them most output is empty.
+    #: ``recommended`` materially sharpen it; ``optional`` add a surface.
+    priority: str = "recommended"
+    #: What this export switches on, for the "why am I collecting this" column.
+    unlocks: str = ""
+    notes: str = ""
+
+    @property
+    def filename(self) -> str:
+        return f"{self.key}.csv"
+
+    @property
+    def headers(self) -> list[str]:
+        return [column.name for column in self.columns]
+
+
+#: Priority ordering used when the template is laid out.
+INTAKE_PRIORITIES = ("core", "recommended", "optional")
+
+
 class Connector(ABC):
     """Translates one vendor export into canonical records."""
 
@@ -125,6 +176,9 @@ class Connector(ABC):
     description: str = ""
     #: Dataset collections this connector populates.
     produces: tuple[str, ...] = ()
+    #: Exports this connector reads, declared so ``trailguide intake`` can
+    #: generate a collection template straight from the connector registry.
+    intake: tuple[IntakeSheet, ...] = ()
 
     def __init__(self, spec: SourceSpec, config: Config) -> None:
         self.spec = spec

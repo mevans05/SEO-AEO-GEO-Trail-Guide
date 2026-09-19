@@ -17,8 +17,9 @@ cd "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}"
 echo "[trailguide] installing project and dev dependencies..."
 
 # Editable install brings in PyYAML and puts the `trailguide` CLI on PATH.
-# Idempotent: re-running simply refreshes the install.
-python3 -m pip install --quiet --disable-pip-version-check -e ".[dev]"
+# `deliverables` adds the Word, PowerPoint and workbook writers, which the
+# document tests import. Idempotent: re-running simply refreshes the install.
+python3 -m pip install --quiet --disable-pip-version-check -e ".[dev,deliverables]"
 
 # Linter is not a runtime dependency but is expected by the contributing flow.
 python3 -m pip install --quiet --disable-pip-version-check ruff

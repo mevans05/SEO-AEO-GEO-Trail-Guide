@@ -16,7 +16,7 @@ from ..core import coerce
 from ..core.ai_engines import is_llm_referral
 from ..core.classify import is_branded, url_template
 from ..core.schemas import ChannelMetric, Dataset, PageMetric
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 PAGE_COLUMNS = ("landing page", "landing page + query string", "page path", "page",
                 "page path and screen class", "url", "address")
@@ -40,6 +40,59 @@ class GA4Connector(Connector):
     aliases = ("analytics", "google_analytics", "adobe_analytics", "matomo")
     description = "GA4 or equivalent analytics export (landing pages and/or channels)."
     produces = ("pages", "channels")
+
+    intake = (
+        IntakeSheet(
+            key="ga4_landing_pages",
+            title="GA4 - landing pages",
+            source_type="ga4",
+            priority="core",
+            export_from=(
+                "GA4 > Reports > Engagement > Landing page. Add Sessions, Engagement rate, "
+                "Key events and Total revenue, then Share > Download CSV."
+            ),
+            unlocks=(
+                "Observed revenue per session, conversion-rate opportunities, and the "
+                "page-level economics that keep projections grounded in real behaviour."
+            ),
+            notes="Same date window as the Search Console pages export, so the two line up.",
+            columns=(
+                IntakeColumn("Landing page", "Landing page path or URL.", "/shoes", True),
+                IntakeColumn("Sessions", "Sessions to the page.", "3120", True),
+                IntakeColumn("Engagement rate", "Engagement rate.", "0.62"),
+                IntakeColumn("Key events", "Conversions / key events.", "48"),
+                IntakeColumn("Total revenue", "Revenue attributed to the page.", "18400"),
+            ),
+        ),
+        IntakeSheet(
+            key="ga4_channels_monthly",
+            title="GA4 - channels by month",
+            source_type="ga4",
+            priority="core",
+            export_from=(
+                "GA4 > Reports > Acquisition > Traffic acquisition, with Month as a "
+                "secondary dimension. Export 12-16 months."
+            ),
+            unlocks=(
+                "Track 1 baseline, the branded/direct lift estimator, and the observed "
+                "conversion rate the survey estimator calibrates against."
+            ),
+            notes=(
+                "Keep Direct, Organic Search, Email and Organic Social as separate rows - "
+                "the lift estimator removes email and social before correlating."
+            ),
+            columns=(
+                IntakeColumn("Session default channel group", "Channel name.",
+                             "Organic Search", True),
+                IntakeColumn("Date", "Month the row covers.", "2026-08-01", True),
+                IntakeColumn("Sessions", "Sessions in the period.", "41200", True),
+                IntakeColumn("Total users", "Users in the period.", "33800"),
+                IntakeColumn("Key events", "Conversions / key events.", "610"),
+                IntakeColumn("Total revenue", "Revenue for the channel.", "240000"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

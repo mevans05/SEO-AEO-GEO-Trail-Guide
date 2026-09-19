@@ -17,7 +17,7 @@ from typing import Any
 
 from ..core import coerce
 from ..core.schemas import Dataset, PageMetric
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 _AUDIT_FIELDS = {
     "largest-contentful-paint": "lcp_ms",
@@ -43,6 +43,39 @@ class PageSpeedConnector(Connector):
     aliases = ("psi", "pagespeed_insights", "lighthouse", "crux", "web_vitals")
     description = "PageSpeed Insights or Lighthouse report (JSON) or a Core Web Vitals CSV."
     produces = ("pages",)
+
+    intake = (
+        IntakeSheet(
+            key="core_web_vitals",
+            title="Core Web Vitals",
+            source_type="pagespeed",
+            priority="recommended",
+            export_from=(
+                "PageSpeed Insights API, CrUX, or a Lighthouse batch run across your "
+                "top landing pages. Lighthouse JSON reports are read directly."
+            ),
+            unlocks=(
+                "Core Web Vitals opportunities, valued through conversion rate rather "
+                "than as an abstract score."
+            ),
+            notes=(
+                "Field data (CrUX) beats lab data where you have it. Elasticities are "
+                "published benchmarks - validate before treating them as a commitment."
+            ),
+            columns=(
+                IntakeColumn("URL", "Page measured.", "https://example.com/shoes", True),
+                IntakeColumn("Device", "mobile or desktop.", "mobile", True),
+                IntakeColumn("LCP", "Largest Contentful Paint, seconds or ms.", "3.4", True),
+                IntakeColumn("INP", "Interaction to Next Paint, ms.", "290"),
+                IntakeColumn("CLS", "Cumulative Layout Shift.", "0.14"),
+                IntakeColumn("TTFB", "Time to first byte.", "0.8"),
+                IntakeColumn("Performance", "Lighthouse performance score.", "62"),
+                IntakeColumn("SEO", "Lighthouse SEO score.", "92"),
+                IntakeColumn("Accessibility", "Lighthouse accessibility score.", "88"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

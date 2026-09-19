@@ -14,7 +14,7 @@ from __future__ import annotations
 from ..core import coerce
 from ..core.ai_engines import normalize_engine
 from ..core.schemas import CitationRecord, Dataset
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 
 @register
@@ -25,6 +25,45 @@ class LLMPanelConnector(Connector):
     aliases = ("citations", "llm_citations", "aeo_panel", "geo_panel", "share_of_model")
     description = "LLM prompt/citation panel export (prompt x engine x run observations)."
     produces = ("citations",)
+
+    intake = (
+        IntakeSheet(
+            key="citation_panel",
+            title="LLM citation panel",
+            source_type="llm_panel",
+            priority="recommended",
+            export_from=(
+                "Profound, Peec, Otterly, Scrunch or an in-house prompt harness. One row "
+                "per prompt x engine x run."
+            ),
+            unlocks=(
+                "The whole GEO surface: citation gap analysis and the citation-share "
+                "estimator for dark LLM influence."
+            ),
+            notes=(
+                "Without this the GEO analysis is skipped entirely and Track 2's LLM "
+                "component falls back to benchmarks. Run 40+ prompts across 3+ engines."
+            ),
+            columns=(
+                IntakeColumn("Date", "When the prompt was run.", "2026-08-14", True),
+                IntakeColumn("Prompt", "The prompt as asked.",
+                             "best trail running shoes for wide feet", True),
+                IntakeColumn("Cluster", "Topic grouping for the prompt.", "footwear", True),
+                IntakeColumn("Engine", "Assistant queried.", "chatgpt", True),
+                IntakeColumn("Brand cited", "Whether the brand appeared.", "TRUE", True),
+                IntakeColumn("Brand position", "Rank of the brand mention in the answer.", "2"),
+                IntakeColumn("Sentiment", "Tone of the mention.", "positive"),
+                IntakeColumn("Cited URLs", "Sources the answer cited, comma separated.",
+                             "example.com/shoes, competitor.com"),
+                IntakeColumn("Competitors cited", "Competitor brands in the answer.",
+                             "competitor-a, competitor-b"),
+                IntakeColumn("Monthly prompt volume", "Estimated monthly volume.", "1800"),
+                IntakeColumn("Buying stage", "Funnel stage the prompt sits in.",
+                             "consideration"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

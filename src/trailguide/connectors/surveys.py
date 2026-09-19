@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from ..core import coerce
 from ..core.schemas import Dataset, SurveyResponse
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 _AI_ANSWER_TOKENS = ("ai", "chatgpt", "assistant", "llm", "copilot", "perplexity", "gemini", "claude")
 _SEARCH_ANSWER_TOKENS = ("search", "google", "bing", "seo", "organic")
@@ -28,6 +28,39 @@ class SurveyConnector(Connector):
     aliases = ("surveys", "intercept", "attribution_survey", "post_purchase_survey")
     description = "Discovery-attribution survey export (aggregated shares or raw responses)."
     produces = ("surveys",)
+
+    intake = (
+        IntakeSheet(
+            key="discovery_survey",
+            title="Discovery attribution survey",
+            source_type="survey",
+            priority="recommended",
+            export_from=(
+                "A 'How did you first hear about us?' question on the post-conversion "
+                "or post-purchase flow. Aggregate to one row per month."
+            ),
+            unlocks=(
+                "The highest-confidence Track 2 estimators for both dark organic and "
+                "dark LLM influence. This is the single most valuable row in the pack."
+            ),
+            notes=(
+                "Shares may be 0-1 or 0-100; both are handled. Set 'Converted only' to "
+                "TRUE when only customers were surveyed rather than all visitors."
+            ),
+            columns=(
+                IntakeColumn("Period start", "Month the responses cover.", "2026-08-01", True),
+                IntakeColumn("Respondents", "Number of responses.", "412", True),
+                IntakeColumn("Share search engine", "Share crediting a search engine.",
+                             "0.38", True),
+                IntakeColumn("Share AI assistant", "Share crediting an AI assistant.",
+                             "0.11", True),
+                IntakeColumn("Share other", "Everything else.", "0.51"),
+                IntakeColumn("Converted only", "TRUE if only customers were surveyed.",
+                             "TRUE"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

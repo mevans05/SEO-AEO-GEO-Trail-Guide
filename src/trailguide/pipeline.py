@@ -23,7 +23,7 @@ from .core.economics import RevenueModel
 from .core.opportunity import Opportunity
 from .core.schemas import Dataset
 from .prioritize import Portfolio, build_portfolio, score_opportunities
-from .prioritize.overlap import deduplicate_overlap
+from .prioritize.overlap import PAGE_DEMAND_VISIBILITY, build_demand_map, deduplicate_overlap
 from .__init__ import __version__
 
 
@@ -190,7 +190,17 @@ def run(config: Config) -> RunResult:
 
     # 5. Remove double counting before anything is ranked: several analyzers can
     #    legitimately find the same keyword, but the clicks behind it are finite.
-    overlap = deduplicate_overlap(opportunities)
+    #    Keywords are resolved to the pages they rank on first, so a page-level
+    #    claim and a keyword-level claim on the same page contest each other.
+    demand_map = build_demand_map(
+        dataset,
+        page_visibility=float(
+            (config.get("analysis.settings.overlap") or {}).get(
+                "page_demand_visibility", PAGE_DEMAND_VISIBILITY
+            )
+        ),
+    )
+    overlap = deduplicate_overlap(opportunities, demand_map)
     if overlap["opportunities_adjusted"]:
         warnings.append(
             f"overlap adjustment: {overlap['opportunities_adjusted']} opportunities claimed "

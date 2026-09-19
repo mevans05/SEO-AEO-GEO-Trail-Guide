@@ -11,7 +11,7 @@ from __future__ import annotations
 from ..core import coerce
 from ..core.classify import url_template
 from ..core.schemas import Dataset, PageMetric
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 URL_COLUMNS = ("url", "slug", "page", "address", "permalink", "link")
 TITLE_COLUMNS = ("title", "name", "page title", "post title", "headline")
@@ -27,6 +27,31 @@ class CMSConnector(Connector):
     aliases = ("webflow", "wordpress", "contentful", "sanity", "content")
     description = "CMS collection export (slug, title, publish/update dates, author, word count)."
     produces = ("pages",)
+
+    intake = (
+        IntakeSheet(
+            key="cms",
+            title="CMS content inventory",
+            source_type="cms",
+            priority="optional",
+            export_from=(
+                "Webflow/WordPress/Contentful collection export. Any list of published "
+                "content with dates and authorship works."
+            ),
+            unlocks="Content age and freshness signals feeding decay analysis.",
+            columns=(
+                IntakeColumn("Slug", "Path or slug.", "/blog/trail-shoes", True),
+                IntakeColumn("Name", "Content title.", "How to choose trail shoes", True),
+                IntakeColumn("Collection", "Content type.", "Blog"),
+                IntakeColumn("Published on", "First publish date.", "2024-03-11"),
+                IntakeColumn("Updated on", "Last update date.", "2026-01-20"),
+                IntakeColumn("Author", "Author name.", "A. Analyst"),
+                IntakeColumn("Word count", "Body word count.", "1420"),
+                IntakeColumn("Schema", "Structured data type present.", "Article"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

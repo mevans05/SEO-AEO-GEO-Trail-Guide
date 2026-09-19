@@ -16,7 +16,7 @@ import re
 from ..core import coerce
 from ..core.ai_engines import classify_bot
 from ..core.schemas import BotHit, Dataset
-from .base import Connector, iter_source_files, read_rows, register
+from .base import Connector, IntakeColumn, IntakeSheet, iter_source_files, read_rows, register
 
 #: Combined/NCSA access log line: host, date, "METHOD path proto", status, bytes, ref, agent.
 _COMBINED_LOG = re.compile(
@@ -34,6 +34,34 @@ class ServerLogConnector(Connector):
     aliases = ("logs", "log_file", "crawl_logs", "access_logs")
     description = "Server access logs or an aggregated crawler-hits CSV."
     produces = ("bot_hits",)
+
+    intake = (
+        IntakeSheet(
+            key="crawler_logs",
+            title="AI and search crawler hits",
+            source_type="server_logs",
+            priority="optional",
+            export_from=(
+                "Server access logs, Cloudflare or a CDN log export, aggregated to "
+                "URL x bot x day. Filter to bot user agents only."
+            ),
+            unlocks=(
+                "Retrieval readiness (pages with demand that AI crawlers never fetch) "
+                "and the crawler-retrieval estimator."
+            ),
+            notes=(
+                "Include GPTBot, ClaudeBot, PerplexityBot, Google-Extended and "
+                "Googlebot at minimum."
+            ),
+            columns=(
+                IntakeColumn("URL", "Path or full URL requested.", "/shoes", True),
+                IntakeColumn("Bot", "Bot or user agent name.", "GPTBot", True),
+                IntakeColumn("Hits", "Requests in the period.", "42", True),
+                IntakeColumn("Date", "Day or month the row covers.", "2026-08-14", True),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

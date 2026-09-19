@@ -6,9 +6,11 @@ import unittest
 
 from helpers import base_config                                   # noqa: F401
 from trailguide.core.opportunity import EffortEstimate, Opportunity, ValueProjection
-from trailguide.core.schemas import Confidence, Surface
+from trailguide.core.schemas import Confidence, Dataset, KeywordMetric, Surface
 from trailguide.prioritize import build_portfolio, score_opportunities
-from trailguide.prioritize.overlap import deduplicate_overlap
+from trailguide.prioritize.overlap import (
+    DemandMap, build_demand_map, deduplicate_overlap,
+)
 
 
 def make(title, revenue, days, *, lag=1.0, ramp=3.0, confidence=Confidence.OBSERVED,
@@ -113,6 +115,90 @@ class TestOverlap(unittest.TestCase):
         self.assertAlmostEqual(summary["value_removed"], 100000)
 
 
+class TestCrossLevelOverlap(unittest.TestCase):
+    """A keyword-level and a page-level claim on the same page are the same clicks."""
+
+    def demand_map(self, visibility=1.0, **pages):
+        """Build a map directly: {page: {keyword: weight}}."""
+        keyword_pages = {kw: page for page, kws in pages.items() for kw in kws}
+        return DemandMap(
+            keyword_pages=keyword_pages,
+            page_keywords={page: dict(kws) for page, kws in pages.items()},
+            page_visibility=visibility,
+        )
+
+    def test_page_and_keyword_claims_contend(self):
+        """The case limitation 1 described: neither used to see the other."""
+        page = make("decay", 100000, 5, entities=["/shoes"])
+        keyword = make("striking", 100000, 5, entities=["trail shoes"])
+        demand = self.demand_map(**{"/shoes": {"trail shoes": 1.0}})
+        deduplicate_overlap([page, keyword], demand)
+        self.assertAlmostEqual(page.projection.known_revenue, 50000)
+        self.assertAlmostEqual(keyword.projection.known_revenue, 50000)
+
+    def test_contention_is_proportional_to_the_keyword_share(self):
+        """Contesting one query of many barely touches a page-level projection."""
+        page = make("decay", 100000, 5, entities=["/shoes"])
+        keyword = make("striking", 100000, 5, entities=["minor"])
+        demand = self.demand_map(**{"/shoes": {"head": 90.0, "minor": 10.0}})
+        deduplicate_overlap([page, keyword], demand)
+        # 90% of the page's demand is uncontested; 10% is split in half.
+        self.assertAlmostEqual(page.projection.known_revenue, 95000)
+        self.assertAlmostEqual(keyword.projection.known_revenue, 50000)
+
+    def test_unobserved_long_tail_is_not_contested(self):
+        """Keywords nobody can see cannot be double-claimed by a keyword opportunity."""
+        page = make("decay", 100000, 5, entities=["/shoes"])
+        keyword = make("striking", 100000, 5, entities=["trail shoes"])
+        demand = self.demand_map(visibility=0.5, **{"/shoes": {"trail shoes": 1.0}})
+        deduplicate_overlap([page, keyword], demand)
+        # Half the page's demand is visible and split; half is long tail it keeps.
+        self.assertAlmostEqual(page.projection.known_revenue, 75000)
+        self.assertAlmostEqual(keyword.projection.known_revenue, 50000)
+
+    def test_page_versus_page_is_unchanged_by_the_expansion(self):
+        """Two claims on one page still split evenly, however its demand resolves."""
+        a = make("a", 100000, 5, entities=["/shoes"])
+        b = make("b", 100000, 5, entities=["/shoes"])
+        demand = self.demand_map(visibility=0.5, **{"/shoes": {"trail shoes": 1.0}})
+        deduplicate_overlap([a, b], demand)
+        self.assertAlmostEqual(a.projection.known_revenue, 50000)
+        self.assertAlmostEqual(b.projection.known_revenue, 50000)
+
+    def test_unmapped_entities_fall_back_to_exact_matching(self):
+        """Prompts and robots.txt have no landing page and keep the old behaviour."""
+        a = make("a", 100000, 5, entities=["robots.txt"])
+        b = make("b", 100000, 5, entities=["robots.txt"])
+        deduplicate_overlap([a, b], self.demand_map(**{"/shoes": {"trail shoes": 1.0}}))
+        self.assertAlmostEqual(a.projection.known_revenue, 50000)
+
+    def test_no_demand_map_reproduces_exact_entity_matching(self):
+        """Without keyword-to-page data the result is the pre-existing behaviour."""
+        page = make("decay", 100000, 5, entities=["/shoes"])
+        keyword = make("striking", 100000, 5, entities=["trail shoes"])
+        deduplicate_overlap([page, keyword])
+        self.assertAlmostEqual(page.projection.known_revenue, 100000)
+        self.assertAlmostEqual(keyword.projection.known_revenue, 100000)
+
+    def test_build_demand_map_attributes_a_keyword_to_its_strongest_page(self):
+        """A query splits across URLs; the one earning most impressions owns it."""
+        dataset = Dataset(keywords=[
+            KeywordMetric(source="gsc", keyword="trail shoes",
+                          page_url="https://x.com/weak", impressions=100),
+            KeywordMetric(source="gsc", keyword="trail shoes",
+                          page_url="https://x.com/strong", impressions=900),
+        ])
+        demand = build_demand_map(dataset)
+        self.assertEqual(demand.keyword_pages["trail shoes"], "https://x.com/strong")
+        self.assertNotIn("https://x.com/weak", demand.page_keywords)
+
+    def test_build_demand_map_ignores_keywords_with_no_page(self):
+        dataset = Dataset(keywords=[
+            KeywordMetric(source="semrush", keyword="orphan", impressions=500),
+        ])
+        self.assertFalse(build_demand_map(dataset))
+
+
 class TestPortfolio(unittest.TestCase):
     def test_capacity_constrains_selection(self):
         items = score_opportunities([make(f"o{i}", 100000, 30) for i in range(6)])
@@ -185,3 +271,57 @@ class TestPortfolio(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestJiraTickets(unittest.TestCase):
+    """Tickets a delivery team can pick up without rewriting them."""
+
+    def ticket(self, **kwargs):
+        from trailguide.report.jira import render_ticket
+        item = make(kwargs.pop("title", "Fix the thing"), kwargs.pop("revenue", 120000),
+                    kwargs.pop("days", 4), **kwargs)
+        item.rank = kwargs.pop("rank", 1)
+        return render_ticket(item, currency="USD", quarter="Q1")
+
+    def test_priority_follows_portfolio_rank(self):
+        from trailguide.report.jira import _priority
+        self.assertEqual(_priority(1), "Highest")
+        self.assertEqual(_priority(10), "High")
+        self.assertEqual(_priority(20), "Medium")
+        self.assertEqual(_priority(99), "Low")
+        self.assertEqual(_priority(None), "Medium")
+
+    def test_estimate_maps_onto_story_points(self):
+        from trailguide.report.jira import _story_points
+        self.assertEqual(_story_points(0.5), 1)
+        self.assertEqual(_story_points(4), 3)
+        self.assertEqual(_story_points(100), 34)
+
+    def test_enabling_work_states_it_carries_no_revenue(self):
+        """Attaching revenue to instrumentation would be dishonest, so it says so."""
+        ticket = self.ticket(tags=("enabling",))
+        self.assertIn("no projected revenue", ticket.value_statement)
+
+    def test_acceptance_criteria_always_include_a_measurement(self):
+        ticket = self.ticket()
+        self.assertTrue(ticket.acceptance_criteria)
+        self.assertTrue(
+            any("measure" in c.lower() or "baseline" in c.lower()
+                for c in ticket.acceptance_criteria)
+        )
+
+    def test_jira_markup_converts_to_markdown(self):
+        from trailguide.report.jira import _jira_markup_to_markdown
+        converted = _jira_markup_to_markdown(
+            "h2. Heading\n\n# first\n# second\n\n* {{code}}\n* *bold* here"
+        )
+        self.assertIn("## Heading", converted)
+        self.assertIn("1. first", converted)
+        self.assertIn("2. second", converted)
+        self.assertIn("- `code`", converted)
+        self.assertIn("**bold**", converted)
+        self.assertNotIn("h2.", converted)
+
+    def test_bold_conversion_leaves_list_markers_alone(self):
+        from trailguide.report.jira import _jira_markup_to_markdown
+        self.assertEqual(_jira_markup_to_markdown("* plain item"), "- plain item")

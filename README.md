@@ -57,6 +57,13 @@ You get:
 | `roadmap.csv` | The scheduled plan by quarter |
 | `evidence.csv` | Every supporting datapoint, traced to its source file |
 | `dark_traffic_estimators.csv` | The Track 2 audit trail |
+| `jira-tickets.csv` | Jira import format, one row per scheduled item |
+| `jira-tickets.md` | The same tickets, as the document appendix |
+| `<client>-opportunity-analysis.docx` | The full analysis as Word — uploads to Drive as a Google Doc |
+| `<client>-highlights.pptx` | The executive deck — uploads to Drive as Google Slides |
+
+The last three need the optional extra: `pip install -e ".[deliverables]"`, then
+`--format md,json,csv,jira,docx,pptx`.
 
 Other commands:
 
@@ -65,7 +72,30 @@ trailguide validate --config config/example_client.yml   # check config and sour
 trailguide sources                                       # list the 14 connectors
 trailguide analyzers                                     # list the 14 analyzers
 trailguide init --out config/new-client.yml              # scaffold a config
+trailguide intake --client "Acme" --domain acme.com      # generate the data intake pack
+trailguide collect --workbook intake/acme-intake.xlsx    # split a filled workbook into CSVs
 ```
+
+## Starting an audit
+
+`trailguide intake` generates the collection pack handed over at the start of an
+audit: a workbook with one tab per export, header-only CSV stubs, a config wired
+to them, and a brief explaining where each export comes from and what it
+unlocks.
+
+```bash
+trailguide intake --client "Acme" --domain acme.com --brand-terms "acme" --out ./intake
+# ... the client fills the workbook ...
+trailguide collect --workbook ./intake/acme-intake.xlsx --out ./intake/data
+trailguide validate --config ./intake/acme.yml
+trailguide run --config ./intake/acme.yml --out ./out -f md,json,csv,jira,docx,pptx
+```
+
+The pack is generated from the connector registry rather than maintained by
+hand, so it always asks for exactly the columns the code reads. Tabs are matched
+back by their headers, so a renamed tab still lands in the right place and a
+partially filled pack still runs — `validate` reports what loaded and what did
+not.
 
 ## What it actually produces
 
@@ -76,9 +106,9 @@ From the bundled sample, abridged:
   Scheduled / deferred    45 / 15
   Dark traffic multiplier SEO 0.14x  GEO 6.60x
   Baseline attributed     5,762,370 USD (Track 1 + Track 2)
-  Projected incremental   1,731,203 USD (1,112,557 - 2,349,849)
-  Target                  1,400,000 USD -> 124% attainment
-  Delivery cost           142,574 USD (142 person-days)
+  Projected incremental   1,297,500 USD (832,174 - 1,762,826)
+  Target                  1,400,000 USD -> 93% attainment
+  Delivery cost           142,786 USD (143 person-days)
 ```
 
 The report leads with a revenue bridge — current attributed revenue, incremental
@@ -229,7 +259,8 @@ Writing a real connector is about 25 lines. See
 cd tests && PYTHONPATH=../src:. python3 -m unittest discover -p 'test_*.py'
 ```
 
-128 tests, no dependencies beyond the standard library and PyYAML. They cover
+164 tests, with no runtime dependency beyond the standard library and PyYAML
+(the document tests need the `deliverables` extra). They cover
 the CTR and revenue arithmetic, every Track 2 estimator, connector normalization,
 overlap deduplication, capacity scheduling, and an end-to-end run against the
 sample dataset — including that the run is deterministic, so month-over-month
@@ -237,13 +268,12 @@ comparisons are signal rather than noise.
 
 ## Limitations
 
-Read [the last section of METHODOLOGY.md](docs/METHODOLOGY.md#10-what-this-system-does-not-do)
+Read [the last section of METHODOLOGY.md](docs/METHODOLOGY.md#11-what-this-system-does-not-do)
 before presenting output to a client. In short: Track 2 is modeled rather than
 measured, the branded-lift estimator establishes correlation rather than
 causation, third-party volume is an estimate, Core Web Vitals elasticities are
-published benchmarks rather than client truth, and overlap deduplication matches
-entities exactly — a keyword-level and a URL-level opportunity covering the same
-page are not currently deduplicated against each other.
+published benchmarks rather than client truth, and overlap deduplication sees
+only the demand the exports show — richer keyword coverage sharpens it.
 
 This system produces a defensible starting position from the data. Which
 clusters matter strategically, what the brand can credibly claim, and what the

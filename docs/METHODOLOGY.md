@@ -145,9 +145,30 @@ split is conservative and easy to explain, which matters more in a number a
 client will challenge. Every adjustment is attached to the opportunity as
 evidence, so the discount is visible rather than silent.
 
-**Known limitation:** overlap is detected on exact entity matches. A
-keyword-level opportunity and a URL-level one covering the same page are not
-currently deduplicated against each other.
+Analyzers claim demand at two levels - some name keywords, others name URLs -
+so before contention is counted, a page-level claim is expanded into the
+keywords that page is observed to rank for, drawn from the keyword records
+themselves. A decaying page and a striking-distance keyword on that page are the
+same clicks, and without the expansion both billed for them in full. The
+expansion is impression-weighted, so contesting one minor query on a page that
+ranks for fifty barely moves the page-level projection while contesting its head
+term takes a real bite.
+
+A keyword export never shows everything a page ranks for: Search Console hides
+anonymized long-tail queries, and a rank tracker only covers terms someone chose
+to track. A page-level claim is therefore only partly exposed to keyword-level
+contention. `PAGE_DEMAND_VISIBILITY` (default 0.5, set per client via
+`analysis.settings.overlap.page_demand_visibility`) is the share assumed visible;
+the remainder is long tail that no keyword-level opportunity is claiming.
+
+That share is a stated assumption rather than a derived one, deliberately.
+Deriving it would mean comparing keyword impressions against page impressions,
+and the two are not on a comparable basis - keyword records mix a one-month
+Search Console window with monthly rank-tracker volume, while page records
+accumulate across every period in the export. On the sample data that comparison
+lands between 1.6x and 31x, which is a units mismatch rather than a measurement.
+Naming the assumption is honest; deriving it from mismatched units would repeat
+exactly the class of bug this system has been bitten by twice.
 
 ## 7. Prioritization
 
@@ -187,7 +208,33 @@ score under per-discipline, per-quarter capacity.
   deferred backlog could close it and exactly how many person-days per
   discipline that would take. That turns "we are short" into a costed ask.
 
-## 9. Baseline → intervention → lift → ROI
+## 9. What comes out
+
+The analysis is only useful if it reaches the people who act on it, in the form
+they work in.
+
+| Output | What it is for |
+| --- | --- |
+| `opportunity-analysis.md` | The written analysis. One narrative, and the source every other document renders. |
+| `*-opportunity-analysis.docx` | The same analysis as Word, tickets appended. Uploads to Drive as a native Google Doc. |
+| `*-highlights.pptx` | The executive deck. Uploads to Drive as native Google Slides. |
+| `jira-tickets.csv` | Jira's import format, one row per scheduled item. |
+| `jira-tickets.md` | The same tickets as the document appendix. |
+| `analysis.json` | The full machine-readable result, for dashboards and run-over-run diffs. |
+| `opportunities.csv`, `roadmap.csv`, `evidence.csv` | The register, the schedule and the supporting datapoints. |
+
+The document renders the markdown rather than restating it: one narrative, many
+formats. A second copy of the wording would drift from the first the moment
+either changed.
+
+Tickets carry the case, not just the instruction - what to do, why it is worth
+doing, what "done" means, and how the result will be measured. Acceptance
+criteria lead with the measurement, because a ticket closed without it cannot be
+shown to have worked. Enabling work says plainly that it carries no projected
+revenue, for the same reason the portfolio does: instrumentation does not create
+demand.
+
+## 10. Baseline → intervention → lift → ROI
 
 The POVs' five-step loop maps onto the tooling directly:
 
@@ -205,10 +252,14 @@ Recalibrate `dark_traffic` settings quarterly as survey and panel data
 accumulate. **Treat movement in the estimators as the signal, not the point
 estimate alone.**
 
-## 10. What this system does not do
+## 11. What this system does not do
 
 Stated plainly, because knowing the edges is what makes the rest usable.
 
+- **Overlap is resolved at keyword level, using observed data only.** A page
+  whose keywords are absent from the export contests other claims only at page
+  level, and a keyword with no landing page in the export is matched by name
+  alone. Richer keyword coverage sharpens the deduplication.
 - **It does not replace judgement.** It produces a defensible starting position
   from the data. Which clusters matter strategically, what the brand can
   credibly claim, and what the client will actually resource are human calls.

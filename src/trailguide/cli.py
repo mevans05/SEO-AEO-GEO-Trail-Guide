@@ -5,12 +5,15 @@
     trailguide sources
     trailguide analyzers
     trailguide init      --out config/new-client.yml
+    trailguide intake    --client "Acme" --domain acme.com --out ./intake
+    trailguide collect   --workbook ./intake/acme-intake.xlsx --out ./intake/data
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -19,8 +22,15 @@ from .analysis import registered_analyzers
 from .config import Config
 from .connectors import registered_connectors
 from .errors import TrailGuideError
+from .intake import (
+    ClientProfile, intake_sheets, read_workbook, render_config, render_readme,
+    write_csv_stubs, write_workbook,
+)
 from .pipeline import run as run_pipeline
-from .report import render_markdown, write_csvs, write_json
+from .report import (
+    render_appendix, render_markdown, write_csvs, write_docx, write_jira_csv,
+    write_json, write_pptx,
+)
 
 _TEMPLATE = """# Trail Guide client configuration.
 # Every number here is an assumption the analysis is built on. Review them with
@@ -87,8 +97,11 @@ def _build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--config", "-c", required=True, help="path to the client config YAML")
     run_parser.add_argument("--out", "-o", default="./out", help="output directory")
     run_parser.add_argument(
-        "--format", "-f", default="md,json,csv",
-        help="comma-separated outputs: md, json, csv (default: all)",
+        "--format", "-f", default="md,json,csv,jira",
+        help=(
+            "comma-separated outputs: md, json, csv, jira, docx, pptx "
+            "(default: md,json,csv,jira; docx and pptx need the 'deliverables' extra)"
+        ),
     )
     run_parser.add_argument(
         "--max-detail", type=int, default=25,
@@ -106,6 +119,37 @@ def _build_parser() -> argparse.ArgumentParser:
 
     init_parser = subparsers.add_parser("init", help="write a starter config")
     init_parser.add_argument("--out", "-o", default="trailguide.yml")
+
+    intake_parser = subparsers.add_parser(
+        "intake", help="generate the data collection pack for a new audit"
+    )
+    intake_parser.add_argument("--client", required=True, help="client name")
+    intake_parser.add_argument("--domain", default="", help="primary domain, no protocol")
+    intake_parser.add_argument(
+        "--brand-terms", default="", help="comma-separated branded search terms"
+    )
+    intake_parser.add_argument(
+        "--competitors", default="", help="comma-separated competitor domains"
+    )
+    intake_parser.add_argument(
+        "--model", default="b2b", choices=("b2b", "ecommerce"), help="economics model"
+    )
+    intake_parser.add_argument("--currency", default="USD")
+    intake_parser.add_argument(
+        "--revenue-target", type=float, default=0.0,
+        help="incremental revenue the roadmap must deliver",
+    )
+    intake_parser.add_argument("--out", "-o", default="./intake", help="output directory")
+    intake_parser.add_argument(
+        "--no-workbook", action="store_true",
+        help="skip the xlsx workbook (writes CSV stubs, config and README only)",
+    )
+
+    collect_parser = subparsers.add_parser(
+        "collect", help="split a filled intake workbook into the CSVs the connectors read"
+    )
+    collect_parser.add_argument("--workbook", "-w", required=True, help="filled intake xlsx")
+    collect_parser.add_argument("--out", "-o", default="./data", help="where to write CSVs")
     return parser
 
 
@@ -125,6 +169,19 @@ def _command_run(args: argparse.Namespace) -> int:
         written.append(write_json(result, out_dir / "analysis.json"))
     if "csv" in formats:
         written.extend(write_csvs(result, out_dir))
+    if "jira" in formats:
+        written.append(write_jira_csv(result, out_dir / "jira-tickets.csv"))
+        appendix = out_dir / "jira-tickets.md"
+        appendix.write_text(render_appendix(result), encoding="utf-8")
+        written.append(appendix)
+
+    slug = re.sub(r"[^a-z0-9]+", "-", result.config.client_name.lower()).strip("-") or "client"
+    if "docx" in formats:
+        written.append(
+            write_docx(result, out_dir / f"{slug}-opportunity-analysis.docx", args.max_detail)
+        )
+    if "pptx" in formats:
+        written.append(write_pptx(result, out_dir / f"{slug}-highlights.pptx"))
 
     if not args.quiet:
         _print_summary(result, written)
@@ -241,8 +298,85 @@ def _command_init(args: argparse.Namespace) -> int:
     return 0
 
 
+def _command_intake(args: argparse.Namespace) -> int:
+    def split(value: str) -> tuple[str, ...]:
+        return tuple(part.strip() for part in value.split(",") if part.strip())
+
+    profile = ClientProfile(
+        name=args.client,
+        domain=args.domain or "example.com",
+        brand_terms=split(args.brand_terms),
+        competitors=split(args.competitors),
+        economics_model=args.model,
+        currency=args.currency,
+        revenue_target=args.revenue_target,
+    )
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    sheets = intake_sheets()
+    written: list[Path] = []
+
+    if not args.no_workbook:
+        written.append(
+            write_workbook(out_dir / f"{profile.slug}-intake.xlsx", profile, sheets)
+        )
+
+    written.extend(write_csv_stubs(out_dir / "data", sheets))
+
+    config_path = out_dir / f"{profile.slug}.yml"
+    config_path.write_text(render_config(profile, "data", sheets), encoding="utf-8")
+    written.append(config_path)
+
+    readme_path = out_dir / "README.md"
+    readme_path.write_text(render_readme(profile, sheets), encoding="utf-8")
+    written.append(readme_path)
+
+    counts: dict[str, int] = {}
+    for sheet in sheets:
+        counts[sheet.priority] = counts.get(sheet.priority, 0) + 1
+
+    print(f"\nIntake pack for {profile.name} ({profile.domain})")
+    print("=" * 64)
+    print(f"  Exports requested       {len(sheets)}")
+    for priority in ("core", "recommended", "optional"):
+        if counts.get(priority):
+            print(f"    {priority:20}{counts[priority]}")
+    print(f"\n  Written to {out_dir}/")
+    print(f"    {profile.slug}-intake.xlsx   the workbook to hand over"
+          if not args.no_workbook else "    (workbook skipped)")
+    print(f"    {profile.slug}.yml           config, wired to data/")
+    print("    data/*.csv            header-only stubs")
+    print("    README.md             what to collect and why")
+    print("\n  Next:")
+    print("    1. Fill the workbook (or drop CSVs into data/).")
+    print(f"    2. trailguide collect --workbook {out_dir}/{profile.slug}-intake.xlsx "
+          f"--out {out_dir}/data")
+    print(f"    3. trailguide validate --config {config_path}")
+    print(f"    4. trailguide run --config {config_path} --out ./out\n")
+    return 0
+
+
+def _command_collect(args: argparse.Namespace) -> int:
+    written = read_workbook(args.workbook, args.out)
+    if not written:
+        print(
+            "No filled tabs found. Paste exports under the headers in the workbook, "
+            "keeping row 1 as it is.",
+            file=sys.stderr,
+        )
+        return 1
+    print(f"\nExtracted {len(written)} export(s) from {args.workbook}:")
+    for path in written:
+        rows = max(0, sum(1 for _ in path.open(encoding="utf-8")) - 1)
+        print(f"    {path}  ({rows:,} rows)")
+    print()
+    return 0
+
+
 _COMMANDS = {
     "run": _command_run,
+    "intake": _command_intake,
+    "collect": _command_collect,
     "validate": _command_validate,
     "sources": _command_sources,
     "analyzers": _command_analyzers,

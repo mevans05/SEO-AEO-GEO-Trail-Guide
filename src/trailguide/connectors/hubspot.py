@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from ..core import coerce
 from ..core.schemas import Dataset, FunnelStage
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 SEGMENT_COLUMNS = ("segment", "source", "original source", "latest source",
                    "source / medium", "lifecycle stage", "channel")
@@ -25,6 +25,43 @@ class HubSpotConnector(Connector):
     aliases = ("crm", "salesforce", "pipedrive", "funnel")
     description = "CRM funnel export (sessions -> leads -> MQL -> SQL -> closed won)."
     produces = ("funnel",)
+
+    intake = (
+        IntakeSheet(
+            key="funnel",
+            title="CRM funnel",
+            source_type="hubspot",
+            priority="recommended",
+            export_from=(
+                "HubSpot/Salesforce sources report, one row per source per month, "
+                "covering sessions through closed won."
+            ),
+            unlocks=(
+                "Replaces configured funnel assumptions with observed stage rates and "
+                "deal values, and reports every substitution it makes."
+            ),
+            notes=(
+                "Organic Search is the row that matters most. Rates are only adopted "
+                "when volume supports them, so a sparse export cannot wreck the model."
+            ),
+            columns=(
+                IntakeColumn("Original source", "Channel / source name.",
+                             "Organic Search", True),
+                IntakeColumn("Date", "Month the row covers.", "2026-08-01", True),
+                IntakeColumn("Sessions", "Sessions from the source.", "41200"),
+                IntakeColumn("Contacts", "Leads created.", "910", True),
+                IntakeColumn("MQLs", "Marketing qualified leads.", "410"),
+                IntakeColumn("SQLs", "Sales qualified leads.", "165"),
+                IntakeColumn("Deals", "Opportunities created.", "120"),
+                IntakeColumn("Closed Won", "Deals won.", "36", True),
+                IntakeColumn("Pipeline value", "Open pipeline value.", "2400000"),
+                IntakeColumn("Closed won value", "Revenue from won deals.", "864000"),
+                IntakeColumn("Avg deal size", "Average contract value.", "24000"),
+                IntakeColumn("Days to close", "Average sales cycle in days.", "75"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

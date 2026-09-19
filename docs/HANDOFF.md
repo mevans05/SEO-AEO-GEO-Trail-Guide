@@ -9,7 +9,7 @@ deliberately left open.
 ## Current state
 
 **Branch:** `claude/seo-aeo-priority-analyzer-3qtz9i`
-**Status:** Complete and working. 128 tests pass, `ruff check` is clean, and the
+**Status:** Complete and working. 164 tests pass, `ruff check` is clean, and the
 bundled sample dataset runs end to end with no setup.
 **Not done:** no pull request has been opened, and nothing has been merged to
 `main`.
@@ -23,10 +23,28 @@ automatically. Manually:
 pip install -e ".[dev]"
 export PYTHONPATH="$PWD/src:$PWD/tests"
 
-python3 -m unittest discover -s tests -p 'test_*.py'   # 128 tests
+python3 -m unittest discover -s tests -p 'test_*.py'   # 164 tests
 ruff check .                                            # clean
 trailguide run --config config/example_client.yml --out ./out
 ```
+
+The Word, PowerPoint and workbook writers need the optional extra:
+
+```bash
+pip install -e ".[dev,deliverables]"
+
+# Start an audit: generates the intake workbook, CSV stubs, config and brief.
+trailguide intake --client "Acme" --domain acme.com --out ./intake
+
+# Once the workbook comes back filled:
+trailguide collect --workbook ./intake/acme-intake.xlsx --out ./intake/data
+trailguide validate --config ./intake/acme.yml
+trailguide run --config ./intake/acme.yml --out ./out -f md,json,csv,jira,docx,pptx
+```
+
+Upload the `.docx` and `.pptx` to Google Drive and they convert to a native
+Google Doc and Google Slides file. That conversion is the whole delivery path -
+there is no Google API dependency in the engine.
 
 > The hook only applies to sessions that start on a branch containing it. Until
 > this branch is merged to the repository's default branch, a session started on
@@ -41,7 +59,10 @@ trailguide run --config config/example_client.yml --out ./out
 | `src/trailguide/analysis/dark_traffic.py` | The Track 2 model — the heart of the system. |
 | `src/trailguide/analysis/` | 14 analyzers across 6 surfaces. They find and size; they never rank. |
 | `src/trailguide/prioritize/` | Scoring, overlap deduplication, capacity scheduling. |
-| `src/trailguide/report/` | Markdown analysis plus JSON and CSV exports. |
+| `src/trailguide/report/` | Markdown analysis, Jira tickets, Word/PowerPoint, JSON and CSV. |
+| `src/trailguide/report/documents.py` | Word and PowerPoint writers, and the markdown-to-Word renderer. |
+| `src/trailguide/report/jira.py` | Delivery tickets: Jira CSV import and the document appendix. |
+| `src/trailguide/intake.py` | The audit intake pack: workbook, CSV stubs, config and brief. |
 | `src/trailguide/pipeline.py` | The run sequence, start to finish. |
 | `config/example_client.yml` | Fully commented demo config — the template for real clients. |
 | `data/sample/` | 16 synthetic but internally consistent source files. |
@@ -88,6 +109,29 @@ re-phases each value curve by the time it waits for capacity.
 **Measurement gaps carry zero revenue.** Instrumentation does not create demand.
 They are tagged `enabling` and funded from reserved capacity instead.
 
+**Overlap dedup resolves keywords to their landing pages.** A page-level claim
+is expanded into the keywords that page ranks for, so a decaying page and a
+striking-distance keyword on it contest each other instead of both billing for
+the same clicks. On the sample data this moved removal from about $2.0M to
+$2.9M of annual run rate, and target attainment from 124% to 93% - the earlier
+figure was inflated by cross-level double counting.
+
+**The share of a page's demand that keywords represent is a stated assumption,
+not a derived one.** `PAGE_DEMAND_VISIBILITY` defaults to 0.5. Deriving it from
+keyword impressions over page impressions was tried and rejected: the two are
+not on a comparable basis, and the ratio lands between 1.6x and 31x on the
+sample data. That is a units mismatch, not a measurement.
+
+**The intake template is generated from the connectors.** Every connector
+declares the exports it reads as `IntakeSheet` objects, and `trailguide intake`
+builds the workbook from the registry. A column cannot drift out of the template
+without the connector changing too, and a test fails if a connector declares no
+intake at all.
+
+**Documents render the markdown report rather than restating it.** One
+narrative, many formats. Duplicating the wording in a Word writer would have
+drifted from the markdown the first time either changed.
+
 **Column matching is separator- and case-insensitive.** A literal-match bug in
 `coerce.first_present` silently disabled citation volume, brand position and
 survey shares across every connector. Fixed at that one layer rather than by
@@ -97,9 +141,9 @@ enumerating spellings per connector.
 
 Stated in full at the end of `docs/METHODOLOGY.md`. The ones most likely to bite:
 
-1. **Overlap dedup matches entities exactly.** A keyword-level and a URL-level
-   opportunity covering the same page are not deduplicated against each other.
-   This is the most worthwhile improvement available.
+1. **Overlap dedup only sees what the exports show.** Cross-level matching is
+   closed, but a page whose keywords are absent from the export still contests
+   other claims at page level only. Richer keyword coverage sharpens it.
 2. **`keyword_periods_per_year` must match the export window** (default 12, i.e.
    one month of Search Console). Wrong value skews the zero-click estimator.
 3. **Default CTR curves and CWV elasticities are published benchmarks**, not
@@ -115,14 +159,16 @@ Roughly in order of value:
 
 - Run it against one real client's exports and compare the output to what an
   analyst produced by hand. That is the only real validation.
-- Teach overlap deduplication to map keywords to their landing pages, closing
-  limitation 1.
 - Calibrate `dark_traffic` defaults and CTR curves once real first-party data
   exists, then recalibrate quarterly as the POV prescribes.
 - Add a run-over-run diff so month-to-month movement in opportunities and
   estimators is visible directly. Opportunity IDs are already deterministic to
   support this.
 - Open a PR and merge to `main` so the SessionStart hook applies to all sessions.
+- Validate `PAGE_DEMAND_VISIBILITY` against a client where full keyword coverage
+  exists, and calibrate it rather than leaving it at the 0.5 default.
+- Consider a `sheets` connector reading a Google Sheet directly, so a filled
+  intake workbook never has to be downloaded at all.
 
 ## Environment notes
 

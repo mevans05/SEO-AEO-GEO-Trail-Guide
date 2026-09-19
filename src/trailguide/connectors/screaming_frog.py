@@ -15,7 +15,7 @@ from typing import Any
 from ..core import coerce
 from ..core.classify import url_template
 from ..core.schemas import CrawlIssue, Dataset, PageMetric, Severity
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 DEFAULT_THRESHOLDS: dict[str, float] = {
     "thin_content_words": 300,
@@ -33,6 +33,41 @@ class ScreamingFrogConnector(Connector):
     aliases = ("crawl", "sitebulb", "screamingfrog", "deepcrawl")
     description = "Screaming Frog crawl export (status, indexability, titles, inlinks, word count)."
     produces = ("pages", "crawl_issues")
+
+    intake = (
+        IntakeSheet(
+            key="crawl",
+            title="Site crawl",
+            source_type="screaming_frog",
+            priority="core",
+            export_from=(
+                "Screaming Frog (or Sitebulb/DeepCrawl) > Internal > HTML tab > Export. "
+                "Crawl the full site with JavaScript rendering on if the site needs it."
+            ),
+            unlocks=(
+                "Crawl health, indexation, internal linking and retrieval readiness - "
+                "four analyzers across the technical and GEO surfaces."
+            ),
+            columns=(
+                IntakeColumn("Address", "The crawled URL.", "https://example.com/shoes", True),
+                IntakeColumn("Status Code", "HTTP status.", "200", True),
+                IntakeColumn("Indexability", "Indexable / Non-Indexable.", "Indexable", True),
+                IntakeColumn("Indexability Status", "Reason when non-indexable.",
+                             "Canonicalised"),
+                IntakeColumn("Title 1", "Page title.", "Trail Running Shoes"),
+                IntakeColumn("Meta Description 1", "Meta description.", "Shop trail shoes..."),
+                IntakeColumn("H1-1", "First H1.", "Trail Running Shoes"),
+                IntakeColumn("Word Count", "Body word count.", "840"),
+                IntakeColumn("Crawl Depth", "Clicks from the homepage.", "2"),
+                IntakeColumn("Unique Inlinks", "Distinct internal links in.", "14"),
+                IntakeColumn("Response Time", "Seconds to first byte.", "0.43"),
+                IntakeColumn("Canonical Link Element 1", "Declared canonical.",
+                             "https://example.com/shoes"),
+                IntakeColumn("Last Modified", "Last-Modified header.", "2026-05-02"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

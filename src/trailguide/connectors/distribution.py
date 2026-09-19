@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from ..core import coerce
 from ..core.schemas import ChannelMetric, Dataset
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 DATE_COLUMNS = ("date", "day", "week", "month", "send date", "period", "start date")
 
@@ -25,6 +25,27 @@ class LinkedInConnector(Connector):
     aliases = ("linkedin_analytics", "linkedin_pages")
     description = "LinkedIn analytics export (impressions, engagements, clicks, followers)."
     produces = ("channels",)
+
+    intake = (
+        IntakeSheet(
+            key="linkedin",
+            title="LinkedIn organic posts",
+            source_type="linkedin",
+            priority="optional",
+            export_from="LinkedIn Page admin > Analytics > Content > Export.",
+            unlocks="Owned-channel distribution opportunities, sized from observed reach.",
+            columns=(
+                IntakeColumn("Date", "Post date.", "2026-08-14", True),
+                IntakeColumn("Post title", "Post text or title.", "Why fit matters"),
+                IntakeColumn("Impressions", "Impressions.", "8400", True),
+                IntakeColumn("Clicks", "Clicks.", "210", True),
+                IntakeColumn("Engagements", "Reactions, comments, shares.", "320"),
+                IntakeColumn("Engagement rate", "Engagement rate.", "0.038"),
+                IntakeColumn("Followers", "Follower count at the time.", "18200"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()
@@ -79,6 +100,28 @@ class BeehiivConnector(Connector):
     aliases = ("newsletter", "email_platform", "substack", "mailchimp")
     description = "Newsletter analytics export (sends, opens, clicks, subscribers)."
     produces = ("channels",)
+
+    intake = (
+        IntakeSheet(
+            key="newsletter",
+            title="Newsletter sends",
+            source_type="beehiiv",
+            priority="optional",
+            export_from="beehiiv / Mailchimp / Substack campaign export, one row per send.",
+            unlocks="Owned-channel distribution opportunities, sized per send.",
+            columns=(
+                IntakeColumn("Send date", "Date sent.", "2026-08-14", True),
+                IntakeColumn("Subject", "Subject line.", "Trail season is here"),
+                IntakeColumn("Sends", "Recipients delivered.", "24000", True),
+                IntakeColumn("Opens", "Unique opens.", "9800"),
+                IntakeColumn("Clicks", "Unique clicks.", "1240", True),
+                IntakeColumn("Open rate", "Open rate.", "0.41"),
+                IntakeColumn("Click rate", "Click rate.", "0.052"),
+                IntakeColumn("Subscribers", "Active subscribers.", "24500"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()

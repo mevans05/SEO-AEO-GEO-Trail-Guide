@@ -14,7 +14,7 @@ from __future__ import annotations
 from ..core import coerce
 from ..core.classify import classify_intent, is_branded, normalize_serp_features
 from ..core.schemas import Dataset, KeywordMetric, PageMetric
-from .base import Connector, register
+from .base import Connector, IntakeColumn, IntakeSheet, register
 
 QUERY_COLUMNS = ("query", "queries", "search query", "top queries", "keyword")
 PAGE_COLUMNS = ("page", "pages", "landing page", "url", "top pages", "address")
@@ -32,6 +32,56 @@ class SearchConsoleConnector(Connector):
     aliases = ("search_console", "google_search_console", "searchconsole")
     description = "Google Search Console performance export (query / page / date)."
     produces = ("keywords", "pages")
+
+    intake = (
+        IntakeSheet(
+            key="search_console_queries",
+            title="Search Console - queries",
+            source_type="gsc",
+            priority="core",
+            export_from=(
+                "Search Console > Performance > Search results. Set the date range to the "
+                "last full month, add the Query and Page dimensions, then Export > CSV."
+            ),
+            unlocks=(
+                "Striking distance, cannibalization, answer capture, and the zero-click "
+                "estimator that anchors Track 2."
+            ),
+            notes=(
+                "Export one full month. If you change the window, set "
+                "analysis.settings.dark_traffic.keyword_periods_per_year to match "
+                "(12 for one month, 4 for a quarter)."
+            ),
+            columns=(
+                IntakeColumn("Query", "The search query.", "trail running shoes", True),
+                IntakeColumn("Page", "Landing page that ranked for the query.",
+                             "https://example.com/shoes", True),
+                IntakeColumn("Clicks", "Clicks in the period.", "128", True),
+                IntakeColumn("Impressions", "Impressions in the period.", "4210", True),
+                IntakeColumn("CTR", "Click-through rate. Optional; recomputed if absent.", "3.04%"),
+                IntakeColumn("Position", "Average position.", "8.4", True),
+            ),
+        ),
+        IntakeSheet(
+            key="search_console_pages_monthly",
+            title="Search Console - pages by month",
+            source_type="gsc",
+            priority="core",
+            export_from=(
+                "Search Console > Performance > Search results > Pages tab, with the Date "
+                "dimension added. Export 12-16 months so decay and trend are visible."
+            ),
+            unlocks="Content decay, indexation value, and the branded/direct lift estimator.",
+            columns=(
+                IntakeColumn("Page", "Page URL.", "https://example.com/shoes", True),
+                IntakeColumn("Date", "Month or day the row covers.", "2026-08-01", True),
+                IntakeColumn("Clicks", "Clicks in the period.", "512", True),
+                IntakeColumn("Impressions", "Impressions in the period.", "18400", True),
+                IntakeColumn("Position", "Average position.", "6.1"),
+            ),
+        ),
+    )
+
 
     def load(self) -> Dataset:
         dataset = Dataset()
