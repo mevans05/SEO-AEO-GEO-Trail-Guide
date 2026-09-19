@@ -1,0 +1,211 @@
+# Trail Guide demo configuration: Vantive, a fictional B2B revenue-intelligence
+# platform. Every path points at the bundled sample dataset, so this config runs
+# end to end with no setup:
+#
+#   trailguide run --config config/example_client.yml --out ./out
+#
+# Use it as the starting point for a real client: replace the paths, then work
+# through the economics and capacity blocks with the client before trusting the
+# output. Those two blocks drive every number in the report.
+
+client:
+  name: Vantive
+  domain: vantive.io
+  brand_terms: [vantive]
+  competitors: [clearloop.com, pipelinehq.com, revsignal.io]
+
+planning:
+  horizon_months: 12
+  quarters: 4
+  currency: USD
+  # Incremental revenue the portfolio is being asked to deliver in the horizon.
+  revenue_target: 1400000
+  # Leave at 0 to use the modeled Track 1 + Track 2 baseline from the data.
+  baseline_organic_revenue: 0
+  # Warn when the portfolio claims more incremental organic traffic than this
+  # share of the current baseline - almost always an assumption error.
+  max_incremental_share_of_baseline: 0.60
+
+economics:
+  model: b2b
+  gross_margin: 0.82
+  prefer_observed: true
+  # Starting assumptions from the last planning cycle. Where the CRM export
+  # disagrees, the observed rates win and the substitution is reported - which
+  # is why these are allowed to be a little stale.
+  b2b:
+    visit_to_lead: 0.018
+    lead_to_mql: 0.40
+    mql_to_sql: 0.35
+    sql_to_win: 0.20
+    average_contract_value: 21000
+    sales_cycle_days: 60
+  # Value per session by query intent: a pricing query is not a glossary lookup.
+  intent_multipliers:
+    transactional: 2.6
+    commercial: 1.7
+    navigational: 1.9
+    informational: 0.35
+    unknown: 1.0
+  template_multipliers:
+    pricing: 2.4
+    demo: 3.0
+    product: 1.8
+    compare: 1.6
+    customers: 1.3
+    blog: 0.8
+    glossary: 0.3
+
+# Track 2 assumptions. These are the numbers to revisit each quarter as the
+# model is recalibrated against survey and panel data.
+dark_traffic:
+  zero_click_assist_rate: 0.12
+  max_branded_direct_share: 0.50
+  benchmark_dark_organic_multiplier: 0.22
+  benchmark_llm_multiplier: 6.0
+  citation_visit_rate: 0.14
+  crawler_session_ratio: 0.015
+  min_periods_for_lift: 6
+  survey_confidence_n: 100
+
+# Strategy's thumb on the scale, applied to data-derived value and always shown
+# in the output so the tilt is visible rather than hidden.
+strategy:
+  cluster_multipliers:
+    forecasting: 1.35
+    revenue intelligence: 1.25
+    pipeline analytics: 1.15
+    competitive: 1.30
+    glossary: 0.6
+
+capacity:
+  reserved_for_enabling: 0.10
+  # A realistic single-client retainer of roughly one FTE across disciplines.
+  per_quarter:
+    seo: 18
+    content: 22
+    engineering: 8
+    design: 5
+    analytics: 5
+    strategy: 4
+    outreach: 4
+
+effort:
+  cost_per_day:
+    seo: 950
+    content: 850
+    engineering: 1200
+    design: 900
+    analytics: 1000
+    strategy: 1400
+    outreach: 800
+
+scoring:
+  weights:
+    value: 0.35
+    efficiency: 0.35
+    speed: 0.15
+    confidence: 0.15
+
+sources:
+  - type: gsc
+    name: search_console_queries
+    path: ../data/sample/gsc_queries.csv
+
+  - type: gsc
+    name: search_console_pages_monthly
+    path: ../data/sample/gsc_pages_monthly.csv
+
+  - type: semrush
+    name: semrush_positions
+    path: ../data/sample/semrush_positions.csv
+
+  - type: semrush_gap
+    name: semrush_keyword_gap
+    path: ../data/sample/semrush_keyword_gap.csv
+    options:
+      client_column: vantive.io
+      competitor_columns: [clearloop.com, pipelinehq.com, revsignal.io]
+
+  - type: ga4
+    name: ga4_landing_pages
+    path: ../data/sample/ga4_landing_pages.csv
+
+  - type: ga4
+    name: ga4_channels_monthly
+    path: ../data/sample/ga4_channels_monthly.csv
+
+  - type: hubspot
+    name: hubspot_funnel
+    path: ../data/sample/hubspot_funnel.csv
+
+  - type: linkedin
+    name: linkedin_organic
+    path: ../data/sample/linkedin_posts.csv
+
+  - type: beehiiv
+    name: beehiiv_newsletter
+    path: ../data/sample/beehiiv_sends.csv
+
+  - type: cms
+    name: webflow_cms
+    path: ../data/sample/webflow_cms.csv
+    options:
+      base_url: https://vantive.io
+
+  - type: screaming_frog
+    name: crawl
+    path: ../data/sample/screaming_frog_internal_html.csv
+    options:
+      thresholds:
+        thin_content_words: 300
+        max_crawl_depth: 4
+
+  - type: pagespeed
+    name: pagespeed_mobile
+    path: ../data/sample/pagespeed_mobile.csv
+
+  - type: pagespeed
+    name: lighthouse_reports
+    path: ../data/sample/lighthouse_product_forecasting.json
+
+  - type: llm_panel
+    name: citation_panel
+    path: ../data/sample/llm_citations.csv
+
+  - type: server_logs
+    name: crawler_logs
+    path: ../data/sample/server_logs_crawlers.csv
+
+  - type: survey
+    name: discovery_survey
+    path: ../data/sample/discovery_survey.csv
+
+analysis:
+  defaults:
+    annualization_factor: 12.0
+  settings:
+    striking_distance:
+      min_position: 3.0
+      max_position: 20.0
+      min_impressions: 500
+      # Search Console rows here are a single-month window.
+      annualization_factor: 12.0
+    content_gap:
+      min_volume: 500
+      max_difficulty: 75
+      min_cluster_volume: 1000
+      cluster_rules:
+        forecasting: [forecast, forecasting]
+        revenue intelligence: [revenue intelligence, revenue operations, revenue leakage]
+        pipeline analytics: [pipeline, sales velocity, deal desk]
+    citation_gap:
+      max_brand_citation_rate: 0.60
+      min_cluster_volume: 500
+      target_prominence: 0.60
+    retrieval_readiness:
+      retrieval_capture_rate: 0.15
+    core_web_vitals:
+      min_annual_sessions: 400
+    conversion_rate:
+      min_annual_sessions: 300

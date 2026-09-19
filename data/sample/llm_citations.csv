@@ -1,0 +1,337 @@
+Date,Prompt,Cluster,Engine,Brand cited,Brand position,Sentiment,Cited URLs,Competitors cited,Monthly prompt volume,Buying stage
+2026-04-15,best revenue intelligence software,revenue intelligence,ChatGPT,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",4800,evaluation
+2026-04-15,best revenue intelligence software,revenue intelligence,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,4800,evaluation
+2026-04-15,best revenue intelligence software,revenue intelligence,Gemini,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io",4800,evaluation
+2026-04-15,best revenue intelligence software,revenue intelligence,Copilot,no,,,,"clearloop.com, pipelinehq.com",4800,evaluation
+2026-04-15,revenue intelligence platform comparison,revenue intelligence,ChatGPT,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,1900,evaluation
+2026-04-15,revenue intelligence platform comparison,revenue intelligence,Perplexity,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,1900,evaluation
+2026-04-15,revenue intelligence platform comparison,revenue intelligence,Gemini,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",1900,evaluation
+2026-04-15,revenue intelligence platform comparison,revenue intelligence,Copilot,no,,,,pipelinehq.com,1900,evaluation
+2026-04-15,what is revenue intelligence,revenue intelligence,ChatGPT,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com, clearloop.com",3600,awareness
+2026-04-15,what is revenue intelligence,revenue intelligence,Perplexity,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,3600,awareness
+2026-04-15,what is revenue intelligence,revenue intelligence,Gemini,no,,,,clearloop.com,3600,awareness
+2026-04-15,what is revenue intelligence,revenue intelligence,Copilot,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,3600,awareness
+2026-04-15,how do I improve forecast accuracy,forecasting,ChatGPT,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,2900,consideration
+2026-04-15,how do I improve forecast accuracy,forecasting,Perplexity,no,,,,pipelinehq.com,2900,consideration
+2026-04-15,how do I improve forecast accuracy,forecasting,Gemini,no,,,,clearloop.com,2900,consideration
+2026-04-15,how do I improve forecast accuracy,forecasting,Copilot,no,,,,"pipelinehq.com, revsignal.io",2900,consideration
+2026-04-15,best sales forecasting software,forecasting,ChatGPT,no,,,,"revsignal.io, pipelinehq.com",5200,evaluation
+2026-04-15,best sales forecasting software,forecasting,Perplexity,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,5200,evaluation
+2026-04-15,best sales forecasting software,forecasting,Gemini,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",5200,evaluation
+2026-04-15,best sales forecasting software,forecasting,Copilot,no,,,,pipelinehq.com,5200,evaluation
+2026-04-15,how to build a revenue forecast,forecasting,ChatGPT,no,,,,revsignal.io,3300,awareness
+2026-04-15,how to build a revenue forecast,forecasting,Perplexity,no,,,,revsignal.io,3300,awareness
+2026-04-15,how to build a revenue forecast,forecasting,Gemini,no,,,,"revsignal.io, clearloop.com, pipelinehq.com",3300,awareness
+2026-04-15,how to build a revenue forecast,forecasting,Copilot,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,3300,awareness
+2026-04-15,what pipeline coverage ratio should I target,pipeline analytics,ChatGPT,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",1700,consideration
+2026-04-15,what pipeline coverage ratio should I target,pipeline analytics,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",1700,consideration
+2026-04-15,what pipeline coverage ratio should I target,pipeline analytics,Gemini,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",1700,consideration
+2026-04-15,what pipeline coverage ratio should I target,pipeline analytics,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,1700,consideration
+2026-04-15,how to measure sales velocity,pipeline analytics,ChatGPT,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",2100,awareness
+2026-04-15,how to measure sales velocity,pipeline analytics,Perplexity,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",2100,awareness
+2026-04-15,how to measure sales velocity,pipeline analytics,Gemini,no,,,,pipelinehq.com,2100,awareness
+2026-04-15,how to measure sales velocity,pipeline analytics,Copilot,no,,,,clearloop.com,2100,awareness
+2026-04-15,tools for pipeline analytics,pipeline analytics,ChatGPT,no,,,,"pipelinehq.com, clearloop.com",1150,evaluation
+2026-04-15,tools for pipeline analytics,pipeline analytics,Perplexity,no,,,,"pipelinehq.com, revsignal.io",1150,evaluation
+2026-04-15,tools for pipeline analytics,pipeline analytics,Gemini,no,,,,revsignal.io,1150,evaluation
+2026-04-15,tools for pipeline analytics,pipeline analytics,Copilot,no,,,,"revsignal.io, clearloop.com",1150,evaluation
+2026-04-15,clearloop alternatives,competitive,ChatGPT,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,590,evaluation
+2026-04-15,clearloop alternatives,competitive,Perplexity,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,590,evaluation
+2026-04-15,clearloop alternatives,competitive,Gemini,no,,,,revsignal.io,590,evaluation
+2026-04-15,clearloop alternatives,competitive,Copilot,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",590,evaluation
+2026-04-15,vantive vs clearloop,competitive,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,320,evaluation
+2026-04-15,vantive vs clearloop,competitive,Perplexity,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",320,evaluation
+2026-04-15,vantive vs clearloop,competitive,Gemini,no,,,,revsignal.io,320,evaluation
+2026-04-15,vantive vs clearloop,competitive,Copilot,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io",320,evaluation
+2026-04-15,is vantive good for revops,competitive,ChatGPT,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",210,evaluation
+2026-04-15,is vantive good for revops,competitive,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com",210,evaluation
+2026-04-15,is vantive good for revops,competitive,Gemini,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,210,evaluation
+2026-04-15,is vantive good for revops,competitive,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",210,evaluation
+2026-04-15,what should be in a revops tech stack,revops,ChatGPT,no,,,,clearloop.com,1800,awareness
+2026-04-15,what should be in a revops tech stack,revops,Perplexity,no,,,,"clearloop.com, pipelinehq.com",1800,awareness
+2026-04-15,what should be in a revops tech stack,revops,Gemini,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",1800,awareness
+2026-04-15,what should be in a revops tech stack,revops,Copilot,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",1800,awareness
+2026-04-15,how do I reduce revenue leakage,revops,ChatGPT,no,,,,"revsignal.io, clearloop.com",2900,consideration
+2026-04-15,how do I reduce revenue leakage,revops,Perplexity,no,,,,"clearloop.com, pipelinehq.com",2900,consideration
+2026-04-15,how do I reduce revenue leakage,revops,Gemini,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",2900,consideration
+2026-04-15,how do I reduce revenue leakage,revops,Copilot,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io",2900,consideration
+2026-05-15,best revenue intelligence software,revenue intelligence,ChatGPT,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,4800,evaluation
+2026-05-15,best revenue intelligence software,revenue intelligence,Perplexity,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,4800,evaluation
+2026-05-15,best revenue intelligence software,revenue intelligence,Gemini,no,,,,"pipelinehq.com, revsignal.io",4800,evaluation
+2026-05-15,best revenue intelligence software,revenue intelligence,Copilot,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",4800,evaluation
+2026-05-15,revenue intelligence platform comparison,revenue intelligence,ChatGPT,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",1900,evaluation
+2026-05-15,revenue intelligence platform comparison,revenue intelligence,Perplexity,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com, clearloop.com",1900,evaluation
+2026-05-15,revenue intelligence platform comparison,revenue intelligence,Gemini,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",1900,evaluation
+2026-05-15,revenue intelligence platform comparison,revenue intelligence,Copilot,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,1900,evaluation
+2026-05-15,what is revenue intelligence,revenue intelligence,ChatGPT,no,,,,pipelinehq.com,3600,awareness
+2026-05-15,what is revenue intelligence,revenue intelligence,Perplexity,no,,,,"pipelinehq.com, revsignal.io",3600,awareness
+2026-05-15,what is revenue intelligence,revenue intelligence,Gemini,no,,,,clearloop.com,3600,awareness
+2026-05-15,what is revenue intelligence,revenue intelligence,Copilot,no,,,,clearloop.com,3600,awareness
+2026-05-15,how do I improve forecast accuracy,forecasting,ChatGPT,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",2900,consideration
+2026-05-15,how do I improve forecast accuracy,forecasting,Perplexity,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",2900,consideration
+2026-05-15,how do I improve forecast accuracy,forecasting,Gemini,no,,,,"pipelinehq.com, revsignal.io",2900,consideration
+2026-05-15,how do I improve forecast accuracy,forecasting,Copilot,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",2900,consideration
+2026-05-15,best sales forecasting software,forecasting,ChatGPT,no,,,,"pipelinehq.com, revsignal.io",5200,evaluation
+2026-05-15,best sales forecasting software,forecasting,Perplexity,no,,,,"clearloop.com, pipelinehq.com",5200,evaluation
+2026-05-15,best sales forecasting software,forecasting,Gemini,no,,,,"pipelinehq.com, revsignal.io",5200,evaluation
+2026-05-15,best sales forecasting software,forecasting,Copilot,no,,,,"pipelinehq.com, revsignal.io",5200,evaluation
+2026-05-15,how to build a revenue forecast,forecasting,ChatGPT,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com",3300,awareness
+2026-05-15,how to build a revenue forecast,forecasting,Perplexity,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",3300,awareness
+2026-05-15,how to build a revenue forecast,forecasting,Gemini,no,,,,revsignal.io,3300,awareness
+2026-05-15,how to build a revenue forecast,forecasting,Copilot,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",3300,awareness
+2026-05-15,what pipeline coverage ratio should I target,pipeline analytics,ChatGPT,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,1700,consideration
+2026-05-15,what pipeline coverage ratio should I target,pipeline analytics,Perplexity,no,,,,"pipelinehq.com, revsignal.io",1700,consideration
+2026-05-15,what pipeline coverage ratio should I target,pipeline analytics,Gemini,no,,,,clearloop.com,1700,consideration
+2026-05-15,what pipeline coverage ratio should I target,pipeline analytics,Copilot,no,,,,clearloop.com,1700,consideration
+2026-05-15,how to measure sales velocity,pipeline analytics,ChatGPT,no,,,,clearloop.com,2100,awareness
+2026-05-15,how to measure sales velocity,pipeline analytics,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",2100,awareness
+2026-05-15,how to measure sales velocity,pipeline analytics,Gemini,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",2100,awareness
+2026-05-15,how to measure sales velocity,pipeline analytics,Copilot,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",2100,awareness
+2026-05-15,tools for pipeline analytics,pipeline analytics,ChatGPT,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,1150,evaluation
+2026-05-15,tools for pipeline analytics,pipeline analytics,Perplexity,no,,,,"revsignal.io, clearloop.com, pipelinehq.com",1150,evaluation
+2026-05-15,tools for pipeline analytics,pipeline analytics,Gemini,no,,,,"pipelinehq.com, revsignal.io",1150,evaluation
+2026-05-15,tools for pipeline analytics,pipeline analytics,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",1150,evaluation
+2026-05-15,clearloop alternatives,competitive,ChatGPT,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",590,evaluation
+2026-05-15,clearloop alternatives,competitive,Perplexity,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io",590,evaluation
+2026-05-15,clearloop alternatives,competitive,Gemini,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",590,evaluation
+2026-05-15,clearloop alternatives,competitive,Copilot,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com",590,evaluation
+2026-05-15,vantive vs clearloop,competitive,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,320,evaluation
+2026-05-15,vantive vs clearloop,competitive,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,320,evaluation
+2026-05-15,vantive vs clearloop,competitive,Gemini,no,,,,revsignal.io,320,evaluation
+2026-05-15,vantive vs clearloop,competitive,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com",320,evaluation
+2026-05-15,is vantive good for revops,competitive,ChatGPT,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",210,evaluation
+2026-05-15,is vantive good for revops,competitive,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io",210,evaluation
+2026-05-15,is vantive good for revops,competitive,Gemini,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",210,evaluation
+2026-05-15,is vantive good for revops,competitive,Copilot,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com, clearloop.com",210,evaluation
+2026-05-15,what should be in a revops tech stack,revops,ChatGPT,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",1800,awareness
+2026-05-15,what should be in a revops tech stack,revops,Perplexity,no,,,,"clearloop.com, pipelinehq.com",1800,awareness
+2026-05-15,what should be in a revops tech stack,revops,Gemini,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",1800,awareness
+2026-05-15,what should be in a revops tech stack,revops,Copilot,no,,,,"clearloop.com, revsignal.io",1800,awareness
+2026-05-15,how do I reduce revenue leakage,revops,ChatGPT,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",2900,consideration
+2026-05-15,how do I reduce revenue leakage,revops,Perplexity,no,,,,pipelinehq.com,2900,consideration
+2026-05-15,how do I reduce revenue leakage,revops,Gemini,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",2900,consideration
+2026-05-15,how do I reduce revenue leakage,revops,Copilot,no,,,,clearloop.com,2900,consideration
+2026-06-15,best revenue intelligence software,revenue intelligence,ChatGPT,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com",4800,evaluation
+2026-06-15,best revenue intelligence software,revenue intelligence,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",4800,evaluation
+2026-06-15,best revenue intelligence software,revenue intelligence,Gemini,no,,,,revsignal.io,4800,evaluation
+2026-06-15,best revenue intelligence software,revenue intelligence,Copilot,no,,,,"revsignal.io, pipelinehq.com",4800,evaluation
+2026-06-15,revenue intelligence platform comparison,revenue intelligence,ChatGPT,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",1900,evaluation
+2026-06-15,revenue intelligence platform comparison,revenue intelligence,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com",1900,evaluation
+2026-06-15,revenue intelligence platform comparison,revenue intelligence,Gemini,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",1900,evaluation
+2026-06-15,revenue intelligence platform comparison,revenue intelligence,Copilot,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com, clearloop.com",1900,evaluation
+2026-06-15,what is revenue intelligence,revenue intelligence,ChatGPT,no,,,,"clearloop.com, revsignal.io",3600,awareness
+2026-06-15,what is revenue intelligence,revenue intelligence,Perplexity,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",3600,awareness
+2026-06-15,what is revenue intelligence,revenue intelligence,Gemini,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",3600,awareness
+2026-06-15,what is revenue intelligence,revenue intelligence,Copilot,no,,,,"clearloop.com, pipelinehq.com",3600,awareness
+2026-06-15,how do I improve forecast accuracy,forecasting,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io, clearloop.com",2900,consideration
+2026-06-15,how do I improve forecast accuracy,forecasting,Perplexity,no,,,,pipelinehq.com,2900,consideration
+2026-06-15,how do I improve forecast accuracy,forecasting,Gemini,no,,,,revsignal.io,2900,consideration
+2026-06-15,how do I improve forecast accuracy,forecasting,Copilot,no,,,,clearloop.com,2900,consideration
+2026-06-15,best sales forecasting software,forecasting,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com",5200,evaluation
+2026-06-15,best sales forecasting software,forecasting,Perplexity,no,,,,"pipelinehq.com, revsignal.io",5200,evaluation
+2026-06-15,best sales forecasting software,forecasting,Gemini,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",5200,evaluation
+2026-06-15,best sales forecasting software,forecasting,Copilot,no,,,,"revsignal.io, pipelinehq.com",5200,evaluation
+2026-06-15,how to build a revenue forecast,forecasting,ChatGPT,no,,,,revsignal.io,3300,awareness
+2026-06-15,how to build a revenue forecast,forecasting,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",3300,awareness
+2026-06-15,how to build a revenue forecast,forecasting,Gemini,no,,,,"revsignal.io, pipelinehq.com",3300,awareness
+2026-06-15,how to build a revenue forecast,forecasting,Copilot,no,,,,"revsignal.io, pipelinehq.com",3300,awareness
+2026-06-15,what pipeline coverage ratio should I target,pipeline analytics,ChatGPT,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",1700,consideration
+2026-06-15,what pipeline coverage ratio should I target,pipeline analytics,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",1700,consideration
+2026-06-15,what pipeline coverage ratio should I target,pipeline analytics,Gemini,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",1700,consideration
+2026-06-15,what pipeline coverage ratio should I target,pipeline analytics,Copilot,no,,,,"clearloop.com, pipelinehq.com",1700,consideration
+2026-06-15,how to measure sales velocity,pipeline analytics,ChatGPT,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,2100,awareness
+2026-06-15,how to measure sales velocity,pipeline analytics,Perplexity,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",2100,awareness
+2026-06-15,how to measure sales velocity,pipeline analytics,Gemini,no,,,,revsignal.io,2100,awareness
+2026-06-15,how to measure sales velocity,pipeline analytics,Copilot,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",2100,awareness
+2026-06-15,tools for pipeline analytics,pipeline analytics,ChatGPT,no,,,,clearloop.com,1150,evaluation
+2026-06-15,tools for pipeline analytics,pipeline analytics,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",1150,evaluation
+2026-06-15,tools for pipeline analytics,pipeline analytics,Gemini,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",1150,evaluation
+2026-06-15,tools for pipeline analytics,pipeline analytics,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",1150,evaluation
+2026-06-15,clearloop alternatives,competitive,ChatGPT,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",590,evaluation
+2026-06-15,clearloop alternatives,competitive,Perplexity,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com",590,evaluation
+2026-06-15,clearloop alternatives,competitive,Gemini,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",590,evaluation
+2026-06-15,clearloop alternatives,competitive,Copilot,no,,,,"pipelinehq.com, clearloop.com",590,evaluation
+2026-06-15,vantive vs clearloop,competitive,ChatGPT,no,,,,clearloop.com,320,evaluation
+2026-06-15,vantive vs clearloop,competitive,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,320,evaluation
+2026-06-15,vantive vs clearloop,competitive,Gemini,no,,,,revsignal.io,320,evaluation
+2026-06-15,vantive vs clearloop,competitive,Copilot,no,,,,"revsignal.io, clearloop.com, pipelinehq.com",320,evaluation
+2026-06-15,is vantive good for revops,competitive,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,210,evaluation
+2026-06-15,is vantive good for revops,competitive,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",210,evaluation
+2026-06-15,is vantive good for revops,competitive,Gemini,no,,,,clearloop.com,210,evaluation
+2026-06-15,is vantive good for revops,competitive,Copilot,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",210,evaluation
+2026-06-15,what should be in a revops tech stack,revops,ChatGPT,no,,,,"pipelinehq.com, clearloop.com",1800,awareness
+2026-06-15,what should be in a revops tech stack,revops,Perplexity,no,,,,clearloop.com,1800,awareness
+2026-06-15,what should be in a revops tech stack,revops,Gemini,no,,,,revsignal.io,1800,awareness
+2026-06-15,what should be in a revops tech stack,revops,Copilot,no,,,,clearloop.com,1800,awareness
+2026-06-15,how do I reduce revenue leakage,revops,ChatGPT,no,,,,clearloop.com,2900,consideration
+2026-06-15,how do I reduce revenue leakage,revops,Perplexity,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",2900,consideration
+2026-06-15,how do I reduce revenue leakage,revops,Gemini,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io, clearloop.com",2900,consideration
+2026-06-15,how do I reduce revenue leakage,revops,Copilot,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",2900,consideration
+2026-07-15,best revenue intelligence software,revenue intelligence,ChatGPT,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",4800,evaluation
+2026-07-15,best revenue intelligence software,revenue intelligence,Perplexity,no,,,,clearloop.com,4800,evaluation
+2026-07-15,best revenue intelligence software,revenue intelligence,Gemini,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io",4800,evaluation
+2026-07-15,best revenue intelligence software,revenue intelligence,Copilot,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,4800,evaluation
+2026-07-15,revenue intelligence platform comparison,revenue intelligence,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,1900,evaluation
+2026-07-15,revenue intelligence platform comparison,revenue intelligence,Perplexity,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",1900,evaluation
+2026-07-15,revenue intelligence platform comparison,revenue intelligence,Gemini,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com",1900,evaluation
+2026-07-15,revenue intelligence platform comparison,revenue intelligence,Copilot,no,,,,pipelinehq.com,1900,evaluation
+2026-07-15,what is revenue intelligence,revenue intelligence,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",3600,awareness
+2026-07-15,what is revenue intelligence,revenue intelligence,Perplexity,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,3600,awareness
+2026-07-15,what is revenue intelligence,revenue intelligence,Gemini,no,,,,"revsignal.io, clearloop.com",3600,awareness
+2026-07-15,what is revenue intelligence,revenue intelligence,Copilot,no,,,,"revsignal.io, clearloop.com, pipelinehq.com",3600,awareness
+2026-07-15,how do I improve forecast accuracy,forecasting,ChatGPT,no,,,,pipelinehq.com,2900,consideration
+2026-07-15,how do I improve forecast accuracy,forecasting,Perplexity,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",2900,consideration
+2026-07-15,how do I improve forecast accuracy,forecasting,Gemini,no,,,,"pipelinehq.com, clearloop.com",2900,consideration
+2026-07-15,how do I improve forecast accuracy,forecasting,Copilot,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",2900,consideration
+2026-07-15,best sales forecasting software,forecasting,ChatGPT,no,,,,"revsignal.io, clearloop.com, pipelinehq.com",5200,evaluation
+2026-07-15,best sales forecasting software,forecasting,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,5200,evaluation
+2026-07-15,best sales forecasting software,forecasting,Gemini,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",5200,evaluation
+2026-07-15,best sales forecasting software,forecasting,Copilot,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",5200,evaluation
+2026-07-15,how to build a revenue forecast,forecasting,ChatGPT,no,,,,pipelinehq.com,3300,awareness
+2026-07-15,how to build a revenue forecast,forecasting,Perplexity,no,,,,pipelinehq.com,3300,awareness
+2026-07-15,how to build a revenue forecast,forecasting,Gemini,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com",3300,awareness
+2026-07-15,how to build a revenue forecast,forecasting,Copilot,no,,,,"pipelinehq.com, clearloop.com",3300,awareness
+2026-07-15,what pipeline coverage ratio should I target,pipeline analytics,ChatGPT,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",1700,consideration
+2026-07-15,what pipeline coverage ratio should I target,pipeline analytics,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",1700,consideration
+2026-07-15,what pipeline coverage ratio should I target,pipeline analytics,Gemini,no,,,,"revsignal.io, clearloop.com",1700,consideration
+2026-07-15,what pipeline coverage ratio should I target,pipeline analytics,Copilot,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,1700,consideration
+2026-07-15,how to measure sales velocity,pipeline analytics,ChatGPT,no,,,,pipelinehq.com,2100,awareness
+2026-07-15,how to measure sales velocity,pipeline analytics,Perplexity,no,,,,"revsignal.io, pipelinehq.com",2100,awareness
+2026-07-15,how to measure sales velocity,pipeline analytics,Gemini,no,,,,"revsignal.io, pipelinehq.com",2100,awareness
+2026-07-15,how to measure sales velocity,pipeline analytics,Copilot,no,,,,revsignal.io,2100,awareness
+2026-07-15,tools for pipeline analytics,pipeline analytics,ChatGPT,no,,,,"revsignal.io, clearloop.com",1150,evaluation
+2026-07-15,tools for pipeline analytics,pipeline analytics,Perplexity,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,1150,evaluation
+2026-07-15,tools for pipeline analytics,pipeline analytics,Gemini,no,,,,"pipelinehq.com, clearloop.com",1150,evaluation
+2026-07-15,tools for pipeline analytics,pipeline analytics,Copilot,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,1150,evaluation
+2026-07-15,clearloop alternatives,competitive,ChatGPT,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com",590,evaluation
+2026-07-15,clearloop alternatives,competitive,Perplexity,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",590,evaluation
+2026-07-15,clearloop alternatives,competitive,Gemini,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",590,evaluation
+2026-07-15,clearloop alternatives,competitive,Copilot,no,,,,revsignal.io,590,evaluation
+2026-07-15,vantive vs clearloop,competitive,ChatGPT,no,,,,"clearloop.com, pipelinehq.com",320,evaluation
+2026-07-15,vantive vs clearloop,competitive,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",320,evaluation
+2026-07-15,vantive vs clearloop,competitive,Gemini,no,,,,pipelinehq.com,320,evaluation
+2026-07-15,vantive vs clearloop,competitive,Copilot,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",320,evaluation
+2026-07-15,is vantive good for revops,competitive,ChatGPT,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,210,evaluation
+2026-07-15,is vantive good for revops,competitive,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",210,evaluation
+2026-07-15,is vantive good for revops,competitive,Gemini,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,210,evaluation
+2026-07-15,is vantive good for revops,competitive,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io",210,evaluation
+2026-07-15,what should be in a revops tech stack,revops,ChatGPT,no,,,,"clearloop.com, pipelinehq.com",1800,awareness
+2026-07-15,what should be in a revops tech stack,revops,Perplexity,no,,,,revsignal.io,1800,awareness
+2026-07-15,what should be in a revops tech stack,revops,Gemini,no,,,,revsignal.io,1800,awareness
+2026-07-15,what should be in a revops tech stack,revops,Copilot,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",1800,awareness
+2026-07-15,how do I reduce revenue leakage,revops,ChatGPT,no,,,,pipelinehq.com,2900,consideration
+2026-07-15,how do I reduce revenue leakage,revops,Perplexity,no,,,,"pipelinehq.com, clearloop.com",2900,consideration
+2026-07-15,how do I reduce revenue leakage,revops,Gemini,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",2900,consideration
+2026-07-15,how do I reduce revenue leakage,revops,Copilot,no,,,,pipelinehq.com,2900,consideration
+2026-08-15,best revenue intelligence software,revenue intelligence,ChatGPT,no,,,,"pipelinehq.com, clearloop.com",4800,evaluation
+2026-08-15,best revenue intelligence software,revenue intelligence,Perplexity,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",4800,evaluation
+2026-08-15,best revenue intelligence software,revenue intelligence,Gemini,no,,,,clearloop.com,4800,evaluation
+2026-08-15,best revenue intelligence software,revenue intelligence,Copilot,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",4800,evaluation
+2026-08-15,revenue intelligence platform comparison,revenue intelligence,ChatGPT,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",1900,evaluation
+2026-08-15,revenue intelligence platform comparison,revenue intelligence,Perplexity,no,,,,"revsignal.io, pipelinehq.com",1900,evaluation
+2026-08-15,revenue intelligence platform comparison,revenue intelligence,Gemini,no,,,,pipelinehq.com,1900,evaluation
+2026-08-15,revenue intelligence platform comparison,revenue intelligence,Copilot,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,1900,evaluation
+2026-08-15,what is revenue intelligence,revenue intelligence,ChatGPT,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com",3600,awareness
+2026-08-15,what is revenue intelligence,revenue intelligence,Perplexity,no,,,,pipelinehq.com,3600,awareness
+2026-08-15,what is revenue intelligence,revenue intelligence,Gemini,no,,,,"revsignal.io, clearloop.com",3600,awareness
+2026-08-15,what is revenue intelligence,revenue intelligence,Copilot,no,,,,clearloop.com,3600,awareness
+2026-08-15,how do I improve forecast accuracy,forecasting,ChatGPT,no,,,,pipelinehq.com,2900,consideration
+2026-08-15,how do I improve forecast accuracy,forecasting,Perplexity,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com",2900,consideration
+2026-08-15,how do I improve forecast accuracy,forecasting,Gemini,no,,,,"pipelinehq.com, revsignal.io",2900,consideration
+2026-08-15,how do I improve forecast accuracy,forecasting,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",2900,consideration
+2026-08-15,best sales forecasting software,forecasting,ChatGPT,no,,,,"revsignal.io, pipelinehq.com",5200,evaluation
+2026-08-15,best sales forecasting software,forecasting,Perplexity,no,,,,clearloop.com,5200,evaluation
+2026-08-15,best sales forecasting software,forecasting,Gemini,no,,,,clearloop.com,5200,evaluation
+2026-08-15,best sales forecasting software,forecasting,Copilot,no,,,,"pipelinehq.com, clearloop.com",5200,evaluation
+2026-08-15,how to build a revenue forecast,forecasting,ChatGPT,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",3300,awareness
+2026-08-15,how to build a revenue forecast,forecasting,Perplexity,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,3300,awareness
+2026-08-15,how to build a revenue forecast,forecasting,Gemini,no,,,,pipelinehq.com,3300,awareness
+2026-08-15,how to build a revenue forecast,forecasting,Copilot,no,,,,"clearloop.com, revsignal.io",3300,awareness
+2026-08-15,what pipeline coverage ratio should I target,pipeline analytics,ChatGPT,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,1700,consideration
+2026-08-15,what pipeline coverage ratio should I target,pipeline analytics,Perplexity,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",1700,consideration
+2026-08-15,what pipeline coverage ratio should I target,pipeline analytics,Gemini,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",1700,consideration
+2026-08-15,what pipeline coverage ratio should I target,pipeline analytics,Copilot,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",1700,consideration
+2026-08-15,how to measure sales velocity,pipeline analytics,ChatGPT,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",2100,awareness
+2026-08-15,how to measure sales velocity,pipeline analytics,Perplexity,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com",2100,awareness
+2026-08-15,how to measure sales velocity,pipeline analytics,Gemini,no,,,,"clearloop.com, pipelinehq.com",2100,awareness
+2026-08-15,how to measure sales velocity,pipeline analytics,Copilot,no,,,,"revsignal.io, pipelinehq.com",2100,awareness
+2026-08-15,tools for pipeline analytics,pipeline analytics,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",1150,evaluation
+2026-08-15,tools for pipeline analytics,pipeline analytics,Perplexity,no,,,,"pipelinehq.com, clearloop.com",1150,evaluation
+2026-08-15,tools for pipeline analytics,pipeline analytics,Gemini,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",1150,evaluation
+2026-08-15,tools for pipeline analytics,pipeline analytics,Copilot,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",1150,evaluation
+2026-08-15,clearloop alternatives,competitive,ChatGPT,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,590,evaluation
+2026-08-15,clearloop alternatives,competitive,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com",590,evaluation
+2026-08-15,clearloop alternatives,competitive,Gemini,no,,,,clearloop.com,590,evaluation
+2026-08-15,clearloop alternatives,competitive,Copilot,no,,,,clearloop.com,590,evaluation
+2026-08-15,vantive vs clearloop,competitive,ChatGPT,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,320,evaluation
+2026-08-15,vantive vs clearloop,competitive,Perplexity,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com, clearloop.com",320,evaluation
+2026-08-15,vantive vs clearloop,competitive,Gemini,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,320,evaluation
+2026-08-15,vantive vs clearloop,competitive,Copilot,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,320,evaluation
+2026-08-15,is vantive good for revops,competitive,ChatGPT,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",210,evaluation
+2026-08-15,is vantive good for revops,competitive,Perplexity,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com",210,evaluation
+2026-08-15,is vantive good for revops,competitive,Gemini,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,210,evaluation
+2026-08-15,is vantive good for revops,competitive,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,210,evaluation
+2026-08-15,what should be in a revops tech stack,revops,ChatGPT,no,,,,"clearloop.com, pipelinehq.com",1800,awareness
+2026-08-15,what should be in a revops tech stack,revops,Perplexity,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",1800,awareness
+2026-08-15,what should be in a revops tech stack,revops,Gemini,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",1800,awareness
+2026-08-15,what should be in a revops tech stack,revops,Copilot,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com",1800,awareness
+2026-08-15,how do I reduce revenue leakage,revops,ChatGPT,no,,,,"revsignal.io, clearloop.com, pipelinehq.com",2900,consideration
+2026-08-15,how do I reduce revenue leakage,revops,Perplexity,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,2900,consideration
+2026-08-15,how do I reduce revenue leakage,revops,Gemini,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",2900,consideration
+2026-08-15,how do I reduce revenue leakage,revops,Copilot,no,,,,"revsignal.io, clearloop.com",2900,consideration
+2026-09-15,best revenue intelligence software,revenue intelligence,ChatGPT,no,,,,"revsignal.io, pipelinehq.com",4800,evaluation
+2026-09-15,best revenue intelligence software,revenue intelligence,Perplexity,no,,,,"clearloop.com, pipelinehq.com, revsignal.io",4800,evaluation
+2026-09-15,best revenue intelligence software,revenue intelligence,Gemini,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, revsignal.io, clearloop.com",4800,evaluation
+2026-09-15,best revenue intelligence software,revenue intelligence,Copilot,yes,3,neutral,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",4800,evaluation
+2026-09-15,revenue intelligence platform comparison,revenue intelligence,ChatGPT,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",1900,evaluation
+2026-09-15,revenue intelligence platform comparison,revenue intelligence,Perplexity,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,1900,evaluation
+2026-09-15,revenue intelligence platform comparison,revenue intelligence,Gemini,no,,,,"pipelinehq.com, revsignal.io",1900,evaluation
+2026-09-15,revenue intelligence platform comparison,revenue intelligence,Copilot,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",1900,evaluation
+2026-09-15,what is revenue intelligence,revenue intelligence,ChatGPT,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",3600,awareness
+2026-09-15,what is revenue intelligence,revenue intelligence,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",3600,awareness
+2026-09-15,what is revenue intelligence,revenue intelligence,Gemini,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",3600,awareness
+2026-09-15,what is revenue intelligence,revenue intelligence,Copilot,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",3600,awareness
+2026-09-15,how do I improve forecast accuracy,forecasting,ChatGPT,no,,,,"revsignal.io, clearloop.com, pipelinehq.com",2900,consideration
+2026-09-15,how do I improve forecast accuracy,forecasting,Perplexity,no,,,,"pipelinehq.com, revsignal.io, clearloop.com",2900,consideration
+2026-09-15,how do I improve forecast accuracy,forecasting,Gemini,no,,,,clearloop.com,2900,consideration
+2026-09-15,how do I improve forecast accuracy,forecasting,Copilot,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,2900,consideration
+2026-09-15,best sales forecasting software,forecasting,ChatGPT,no,,,,"clearloop.com, pipelinehq.com",5200,evaluation
+2026-09-15,best sales forecasting software,forecasting,Perplexity,no,,,,revsignal.io,5200,evaluation
+2026-09-15,best sales forecasting software,forecasting,Gemini,no,,,,revsignal.io,5200,evaluation
+2026-09-15,best sales forecasting software,forecasting,Copilot,no,,,,revsignal.io,5200,evaluation
+2026-09-15,how to build a revenue forecast,forecasting,ChatGPT,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",3300,awareness
+2026-09-15,how to build a revenue forecast,forecasting,Perplexity,no,,,,revsignal.io,3300,awareness
+2026-09-15,how to build a revenue forecast,forecasting,Gemini,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",3300,awareness
+2026-09-15,how to build a revenue forecast,forecasting,Copilot,no,,,,"revsignal.io, pipelinehq.com, clearloop.com",3300,awareness
+2026-09-15,what pipeline coverage ratio should I target,pipeline analytics,ChatGPT,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,1700,consideration
+2026-09-15,what pipeline coverage ratio should I target,pipeline analytics,Perplexity,no,,,,clearloop.com,1700,consideration
+2026-09-15,what pipeline coverage ratio should I target,pipeline analytics,Gemini,no,,,,pipelinehq.com,1700,consideration
+2026-09-15,what pipeline coverage ratio should I target,pipeline analytics,Copilot,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,1700,consideration
+2026-09-15,how to measure sales velocity,pipeline analytics,ChatGPT,yes,2,neutral,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com",2100,awareness
+2026-09-15,how to measure sales velocity,pipeline analytics,Perplexity,yes,4,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,2100,awareness
+2026-09-15,how to measure sales velocity,pipeline analytics,Gemini,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",2100,awareness
+2026-09-15,how to measure sales velocity,pipeline analytics,Copilot,no,,,,"revsignal.io, clearloop.com",2100,awareness
+2026-09-15,tools for pipeline analytics,pipeline analytics,ChatGPT,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,clearloop.com,1150,evaluation
+2026-09-15,tools for pipeline analytics,pipeline analytics,Perplexity,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,1150,evaluation
+2026-09-15,tools for pipeline analytics,pipeline analytics,Gemini,yes,3,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com",1150,evaluation
+2026-09-15,tools for pipeline analytics,pipeline analytics,Copilot,no,,,,revsignal.io,1150,evaluation
+2026-09-15,clearloop alternatives,competitive,ChatGPT,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",590,evaluation
+2026-09-15,clearloop alternatives,competitive,Perplexity,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io, pipelinehq.com",590,evaluation
+2026-09-15,clearloop alternatives,competitive,Gemini,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, pipelinehq.com, revsignal.io",590,evaluation
+2026-09-15,clearloop alternatives,competitive,Copilot,no,,,,pipelinehq.com,590,evaluation
+2026-09-15,vantive vs clearloop,competitive,ChatGPT,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com, clearloop.com",320,evaluation
+2026-09-15,vantive vs clearloop,competitive,Perplexity,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, pipelinehq.com",320,evaluation
+2026-09-15,vantive vs clearloop,competitive,Gemini,yes,2,positive,https://vantive.io/blog/revenue-intelligence-explained,"clearloop.com, revsignal.io",320,evaluation
+2026-09-15,vantive vs clearloop,competitive,Copilot,yes,1,neutral,https://vantive.io/blog/revenue-intelligence-explained,revsignal.io,320,evaluation
+2026-09-15,is vantive good for revops,competitive,ChatGPT,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,"pipelinehq.com, clearloop.com, revsignal.io",210,evaluation
+2026-09-15,is vantive good for revops,competitive,Perplexity,yes,1,positive,https://vantive.io/blog/revenue-intelligence-explained,pipelinehq.com,210,evaluation
+2026-09-15,is vantive good for revops,competitive,Gemini,yes,4,neutral,https://vantive.io/blog/revenue-intelligence-explained,"revsignal.io, clearloop.com, pipelinehq.com",210,evaluation
+2026-09-15,is vantive good for revops,competitive,Copilot,no,,,,clearloop.com,210,evaluation
+2026-09-15,what should be in a revops tech stack,revops,ChatGPT,no,,,,"revsignal.io, pipelinehq.com",1800,awareness
+2026-09-15,what should be in a revops tech stack,revops,Perplexity,no,,,,pipelinehq.com,1800,awareness
+2026-09-15,what should be in a revops tech stack,revops,Gemini,no,,,,revsignal.io,1800,awareness
+2026-09-15,what should be in a revops tech stack,revops,Copilot,no,,,,"pipelinehq.com, clearloop.com, revsignal.io",1800,awareness
+2026-09-15,how do I reduce revenue leakage,revops,ChatGPT,no,,,,"revsignal.io, pipelinehq.com",2900,consideration
+2026-09-15,how do I reduce revenue leakage,revops,Perplexity,no,,,,"clearloop.com, revsignal.io, pipelinehq.com",2900,consideration
+2026-09-15,how do I reduce revenue leakage,revops,Gemini,no,,,,pipelinehq.com,2900,consideration
+2026-09-15,how do I reduce revenue leakage,revops,Copilot,no,,,,"clearloop.com, pipelinehq.com",2900,consideration
