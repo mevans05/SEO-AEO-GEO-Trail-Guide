@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import datetime as _dt
 import unittest
 
 from helpers import base_config, channel_dataset, citation, keyword, page   # noqa: F401
@@ -12,7 +11,7 @@ from trailguide.analysis.search import _target_position
 from trailguide.core.ctr import CTRModel
 from trailguide.core.economics import RevenueModel
 from trailguide.core.schemas import (
-    BotHit, CrawlIssue, Dataset, KeywordMetric, PageMetric, Severity, Surface,
+    BotHit, CrawlIssue, Dataset, KeywordMetric, Severity, Surface,
 )
 
 

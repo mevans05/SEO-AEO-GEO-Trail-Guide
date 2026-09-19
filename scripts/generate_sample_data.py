@@ -10,18 +10,24 @@ exact outputs. Run from the repository root:
 
     python3 scripts/generate_sample_data.py
 """
-import csv, json, math, random, datetime as dt
+import csv
+import json
+import math
+import random
 from pathlib import Path
 
 random.seed(20260919)
-OUT = Path("data/sample"); OUT.mkdir(parents=True, exist_ok=True)
+OUT = Path("data/sample")
+OUT.mkdir(parents=True, exist_ok=True)
 DOMAIN = "https://vantive.io"
 COMPETITORS = ["clearloop.com", "pipelinehq.com", "revsignal.io"]
 MONTHS = [f"2025-{m:02d}" for m in range(10, 13)] + [f"2026-{m:02d}" for m in range(1, 10)]
 
 def w(name, rows, fields):
     with (OUT / name).open("w", newline="", encoding="utf-8") as fh:
-        wr = csv.DictWriter(fh, fieldnames=fields); wr.writeheader(); wr.writerows(rows)
+        wr = csv.DictWriter(fh, fieldnames=fields)
+        wr.writeheader()
+        wr.writerows(rows)
     print(f"  {name:38} {len(rows):>5} rows")
 
 # ---------------------------------------------------------------- URL universe
@@ -274,8 +280,10 @@ rows = []
 for month in MONTHS:
     sessions = int(14000 * random.uniform(0.92, 1.08))
     leads = round(sessions * 0.023, 1)
-    mqls = round(leads * 0.46, 1); sqls = round(mqls * 0.41, 1)
-    opps = round(sqls * 0.78, 1); won = round(sqls * 0.23, 1)
+    mqls = round(leads * 0.46, 1)
+    sqls = round(mqls * 0.41, 1)
+    opps = round(sqls * 0.78, 1)
+    won = round(sqls * 0.23, 1)
     for segment in ("Organic Search", "Direct", "Paid Search", "Email"):
         share = {"Organic Search": 0.46, "Direct": 0.27, "Paid Search": 0.18, "Email": 0.09}[segment]
         rows.append({

@@ -13,7 +13,6 @@ from __future__ import annotations
 from collections import defaultdict
 from statistics import median
 
-from ..core.coerce import clamp
 from ..core.opportunity import Opportunity, ValueProjection
 from ..core.schemas import Confidence, Surface
 from .base import AnalysisContext, Analyzer, register_analyzer
@@ -196,8 +195,8 @@ class DistributionAnalyzer(Analyzer):
                 owner_role=context.owner(self.name),
                 tags=["distribution"],
                 recommended_actions=[
-                    f"Prioritize the assets created for the top-ranked SEO and GEO opportunities; "
-                    f"distribution should follow the roadmap, not run parallel to it.",
+                    "Prioritize the assets created for the top-ranked SEO and GEO opportunities; "
+                    "distribution should follow the roadmap, not run parallel to it.",
                     "Publish the underlying data or point of view natively on the channel, not "
                     "just a link - native engagement is what earns third-party citation.",
                     "Track which sends and posts precede movement in branded search and direct "

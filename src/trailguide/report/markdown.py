@@ -89,8 +89,8 @@ def render_markdown(result: RunResult, max_detailed: int = 25) -> str:
     )
     write()
 
-    write(f"| Metric | Value |")
-    write(f"| --- | --- |")
+    write("| Metric | Value |")
+    write("| --- | --- |")
     write(f"| Opportunities identified | {len(result.opportunities)} |")
     write(f"| Scheduled within capacity | {len(portfolio.scheduled)} |")
     write(f"| Deferred (capacity-constrained) | {len(portfolio.deferred)} |")

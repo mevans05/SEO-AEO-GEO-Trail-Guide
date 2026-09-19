@@ -213,6 +213,9 @@ Writing a real connector is about 25 lines. See
 
 ## Documentation
 
+- **[docs/HANDOFF.md](docs/HANDOFF.md)** — state of the work, decisions already
+  made and why, known limitations and next steps. Read this first if you are
+  picking the project up.
 - **[docs/METHODOLOGY.md](docs/METHODOLOGY.md)** — how the POVs map to code, what
   each number claims, and what the system does *not* do
 - **[docs/DATA_CONTRACTS.md](docs/DATA_CONTRACTS.md)** — what to export from each

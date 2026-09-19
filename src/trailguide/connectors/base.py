@@ -12,7 +12,7 @@ import csv
 import json
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Callable, Iterable, Iterator
+from typing import Any, Callable, Iterator
 
 from ..config import Config, SourceSpec
 from ..errors import ConnectorError, UnknownSourceError
