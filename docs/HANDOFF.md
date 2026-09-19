@@ -9,7 +9,7 @@ deliberately left open.
 ## Current state
 
 **Branch:** `claude/seo-aeo-priority-analyzer-3qtz9i`
-**Status:** Complete and working. 164 tests pass, `ruff check` is clean, and the
+**Status:** Complete and working. 169 tests pass, `ruff check` is clean, and the
 bundled sample dataset runs end to end with no setup.
 **Not done:** no pull request has been opened, and nothing has been merged to
 `main`.
@@ -23,7 +23,7 @@ automatically. Manually:
 pip install -e ".[dev]"
 export PYTHONPATH="$PWD/src:$PWD/tests"
 
-python3 -m unittest discover -s tests -p 'test_*.py'   # 164 tests
+python3 -m unittest discover -s tests -p 'test_*.py'   # 169 tests
 ruff check .                                            # clean
 trailguide run --config config/example_client.yml --out ./out
 ```
@@ -36,8 +36,10 @@ pip install -e ".[dev,deliverables]"
 # Start an audit: generates the intake workbook, CSV stubs, config and brief.
 trailguide intake --client "Acme" --domain acme.com --out ./intake
 
-# Once the workbook comes back filled:
-trailguide collect --workbook ./intake/acme-intake.xlsx --out ./intake/data
+# Once the workbook comes back filled. --config also applies the client
+# profile tab (brand terms, competitors, revenue target) to the config.
+trailguide collect --workbook ./intake/acme-intake.xlsx --out ./intake/data \
+                   --config ./intake/acme.yml
 trailguide validate --config ./intake/acme.yml
 trailguide run --config ./intake/acme.yml --out ./out -f md,json,csv,jira,docx,pptx
 ```

@@ -493,3 +493,105 @@ def _signature(headers: list[str]) -> tuple[str, ...]:
             if str(header).strip()
         )
     )
+
+
+# -- reading the filled profile back out ----------------------------------
+
+#: Client profile tab label -> (config block, key). The workbook is where the
+#: client answers these, so this is what carries their answers into the config.
+PROFILE_FIELDS = {
+    "client name": ("client", "name"),
+    "domain": ("client", "domain"),
+    "brand terms": ("client", "brand_terms"),
+    "competitors": ("client", "competitors"),
+    "economics model": ("economics", "model"),
+    "currency": ("planning", "currency"),
+    "revenue target": ("planning", "revenue_target"),
+    "horizon months": ("planning", "horizon_months"),
+    "gross margin": ("economics", "gross_margin"),
+}
+
+#: Fields written back as YAML inline lists rather than scalars.
+_LIST_FIELDS = {"brand_terms", "competitors"}
+
+
+def read_profile(path: str | Path) -> dict[tuple[str, str], str]:
+    """Read the workbook's client profile tab into ``{(block, key): value}``.
+
+    Only fields the client actually filled in are returned, so a blank cell
+    leaves whatever the config already says rather than clearing it.
+    """
+    openpyxl = _require_openpyxl()
+    workbook = openpyxl.load_workbook(path, data_only=True, read_only=True)
+    found: dict[tuple[str, str], str] = {}
+
+    for worksheet in workbook.worksheets:
+        if worksheet.title.strip().lower() != "client profile":
+            continue
+        for row in worksheet.iter_rows(min_row=2, max_col=2, values_only=True):
+            if not row or row[0] is None:
+                continue
+            target = PROFILE_FIELDS.get(str(row[0]).strip().lower())
+            value = row[1] if len(row) > 1 else None
+            if target and value not in (None, ""):
+                found[target] = str(value).strip()
+    workbook.close()
+    return found
+
+
+def apply_profile(config_text: str, profile: dict[tuple[str, str], str]) -> tuple[str, list[str]]:
+    """Update a generated config in place from profile values.
+
+    Rewrites the matching scalar lines rather than reserializing the document,
+    because the generated config carries comments explaining every assumption and
+    a YAML round trip would strip them.
+
+    Returns the new text and a list of the changes made, for reporting.
+    """
+    if not profile:
+        return config_text, []
+
+    lines = config_text.splitlines()
+    block = ""
+    changes: list[str] = []
+
+    for index, line in enumerate(lines):
+        if line and not line[0].isspace() and line.rstrip().endswith(":"):
+            block = line.split(":", 1)[0].strip()
+            continue
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or ":" not in stripped:
+            continue
+        # Only touch keys nested one level under a known top-level block.
+        indent = len(line) - len(line.lstrip())
+        if indent != 2:
+            continue
+        key = stripped.split(":", 1)[0].strip()
+        value = profile.get((block, key))
+        if value is None:
+            continue
+
+        if key in _LIST_FIELDS:
+            items = [part.strip() for part in value.split(",") if part.strip()]
+            rendered = "[" + ", ".join(items) + "]"
+        elif key in ("revenue_target", "horizon_months"):
+            try:
+                rendered = f"{float(value):.0f}"
+            except ValueError:
+                continue
+        elif key == "gross_margin":
+            try:
+                rendered = f"{float(value):g}"
+            except ValueError:
+                continue
+        else:
+            rendered = value
+
+        # Keep any trailing comment: it usually explains the assumption.
+        comment = f"      # {line.split('#', 1)[1].strip()}" if "#" in line else ""
+        previous = stripped.split(":", 1)[1].strip().split("#")[0].strip()
+        if previous != rendered:
+            changes.append(f"{block}.{key}: {previous or '(empty)'} -> {rendered}")
+        lines[index] = f"  {key}: {rendered}{comment}"
+
+    return "\n".join(lines) + "\n", changes

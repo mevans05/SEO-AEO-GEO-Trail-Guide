@@ -10,8 +10,8 @@ from helpers import SAMPLE_CONFIG                                  # noqa: F401
 from trailguide.config import Config
 from trailguide.connectors import registered_connectors
 from trailguide.intake import (
-    ClientProfile, intake_sheets, read_workbook, render_config, render_readme,
-    write_csv_stubs, write_workbook,
+    ClientProfile, apply_profile, intake_sheets, read_profile, read_workbook,
+    render_config, render_readme, write_csv_stubs, write_workbook,
 )
 from trailguide.pipeline import run as run_pipeline
 from trailguide.report.documents import _is_divider, _money, markdown_to_docx
@@ -133,6 +133,83 @@ class TestIntakePack(unittest.TestCase):
             titles = {sheet.title[:31].strip() for sheet in intake_sheets()}
             for title in titles:
                 self.assertEqual(workbook[title].max_row, 1, f"{title} has data rows")
+
+
+class TestClientProfileReadback(unittest.TestCase):
+    """What the client types in the workbook has to reach the config."""
+
+    def fill(self, tmp, values):
+        import openpyxl
+        profile = ClientProfile(name="Acme Co", domain="acme.com")
+        book = Path(tmp) / "intake.xlsx"
+        write_workbook(book, profile)
+        config = Path(tmp) / "acme.yml"
+        config.write_text(render_config(profile), encoding="utf-8")
+
+        workbook = openpyxl.load_workbook(book)
+        worksheet = workbook["Client profile"]
+        for row in worksheet.iter_rows(min_row=2, max_col=2):
+            if row[0].value in values:
+                row[1].value = values[row[0].value]
+        workbook.save(book)
+        return book, config
+
+    def test_profile_values_reach_the_config(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            book, config = self.fill(tmp, {
+                "Brand terms": "acme, acme co",
+                "Competitors": "rival.com, other.com",
+                "Revenue target": 1750000,
+                "Gross margin": 0.78,
+            })
+            updated, changes = apply_profile(
+                config.read_text(encoding="utf-8"), read_profile(book)
+            )
+            config.write_text(updated, encoding="utf-8")
+            loaded = Config.load(config)
+            self.assertEqual(loaded.brand_terms, ["acme", "acme co"])
+            self.assertEqual(loaded.competitors, ["rival.com", "other.com"])
+            self.assertEqual(loaded.revenue_target, 1750000.0)
+            self.assertTrue(changes)
+
+    def test_blank_cells_leave_the_config_alone(self):
+        """A half-filled profile must not wipe what the config already says."""
+        with tempfile.TemporaryDirectory() as tmp:
+            book, config = self.fill(tmp, {"Revenue target": 900000})
+            before = config.read_text(encoding="utf-8")
+            updated, _ = apply_profile(before, read_profile(book))
+            config.write_text(updated, encoding="utf-8")
+            loaded = Config.load(config)
+            self.assertEqual(loaded.revenue_target, 900000.0)
+            self.assertEqual(loaded.client_name, "Acme Co")
+            self.assertEqual(loaded.domain, "acme.com")
+
+    def test_comments_survive_the_update(self):
+        """The config explains every assumption; a YAML round trip would strip that."""
+        with tempfile.TemporaryDirectory() as tmp:
+            book, config = self.fill(tmp, {"Revenue target": 900000})
+            before = config.read_text(encoding="utf-8")
+            updated, _ = apply_profile(before, read_profile(book))
+            self.assertEqual(before.count("#"), updated.count("#"))
+            self.assertIn("keyword_periods_per_year", updated)
+
+    def test_an_empty_profile_is_a_no_op(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            _, config = self.fill(tmp, {})
+            before = config.read_text(encoding="utf-8")
+            updated, changes = apply_profile(before, {})
+            self.assertEqual(updated, before)
+            self.assertEqual(changes, [])
+
+    def test_nested_keys_are_not_touched(self):
+        """`economics.b2b.model` must not be rewritten by an `economics.model` value."""
+        with tempfile.TemporaryDirectory() as tmp:
+            book, config = self.fill(tmp, {"Economics model": "b2b"})
+            updated, _ = apply_profile(
+                config.read_text(encoding="utf-8"), read_profile(book)
+            )
+            self.assertIn("    visit_to_lead: 0.022", updated)
+            self.assertIn("    seo: 45", updated)
 
 
 class TestDocumentHelpers(unittest.TestCase):

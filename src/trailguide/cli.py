@@ -6,7 +6,8 @@
     trailguide analyzers
     trailguide init      --out config/new-client.yml
     trailguide intake    --client "Acme" --domain acme.com --out ./intake
-    trailguide collect   --workbook ./intake/acme-intake.xlsx --out ./intake/data
+    trailguide collect   --workbook ./intake/acme-intake.xlsx --out ./intake/data \\
+                         --config ./intake/acme.yml
 """
 
 from __future__ import annotations
@@ -23,8 +24,8 @@ from .config import Config
 from .connectors import registered_connectors
 from .errors import TrailGuideError
 from .intake import (
-    ClientProfile, intake_sheets, read_workbook, render_config, render_readme,
-    write_csv_stubs, write_workbook,
+    ClientProfile, apply_profile, intake_sheets, read_profile, read_workbook,
+    render_config, render_readme, write_csv_stubs, write_workbook,
 )
 from .pipeline import run as run_pipeline
 from .report import (
@@ -150,6 +151,10 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     collect_parser.add_argument("--workbook", "-w", required=True, help="filled intake xlsx")
     collect_parser.add_argument("--out", "-o", default="./data", help="where to write CSVs")
+    collect_parser.add_argument(
+        "--config", "-c", default=None,
+        help="config to update from the workbook's client profile tab",
+    )
     return parser
 
 
@@ -369,6 +374,23 @@ def _command_collect(args: argparse.Namespace) -> int:
     for path in written:
         rows = max(0, sum(1 for _ in path.open(encoding="utf-8")) - 1)
         print(f"    {path}  ({rows:,} rows)")
+
+    if args.config:
+        config_path = Path(args.config)
+        profile = read_profile(args.workbook)
+        if not profile:
+            print("\n  Client profile tab is empty; config left unchanged.")
+        else:
+            updated, changes = apply_profile(
+                config_path.read_text(encoding="utf-8"), profile
+            )
+            config_path.write_text(updated, encoding="utf-8")
+            if changes:
+                print(f"\n  Updated {config_path} from the client profile tab:")
+                for change in changes:
+                    print(f"    {change}")
+            else:
+                print(f"\n  {config_path} already matches the client profile tab.")
     print()
     return 0
 

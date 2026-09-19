@@ -86,10 +86,15 @@ unlocks.
 ```bash
 trailguide intake --client "Acme" --domain acme.com --brand-terms "acme" --out ./intake
 # ... the client fills the workbook ...
-trailguide collect --workbook ./intake/acme-intake.xlsx --out ./intake/data
+trailguide collect --workbook ./intake/acme-intake.xlsx --out ./intake/data --config ./intake/acme.yml
 trailguide validate --config ./intake/acme.yml
 trailguide run --config ./intake/acme.yml --out ./out -f md,json,csv,jira,docx,pptx
 ```
+
+The workbook's client profile tab is the one place the client states brand
+terms, competitors, revenue target and margin; `collect --config` applies those
+to the config by rewriting the matching lines, so the comments explaining every
+assumption survive. Blank cells leave the config alone.
 
 The pack is generated from the connector registry rather than maintained by
 hand, so it always asks for exactly the columns the code reads. Tabs are matched
@@ -259,7 +264,7 @@ Writing a real connector is about 25 lines. See
 cd tests && PYTHONPATH=../src:. python3 -m unittest discover -p 'test_*.py'
 ```
 
-164 tests, with no runtime dependency beyond the standard library and PyYAML
+169 tests, with no runtime dependency beyond the standard library and PyYAML
 (the document tests need the `deliverables` extra). They cover
 the CTR and revenue arithmetic, every Track 2 estimator, connector normalization,
 overlap deduplication, capacity scheduling, and an end-to-end run against the
