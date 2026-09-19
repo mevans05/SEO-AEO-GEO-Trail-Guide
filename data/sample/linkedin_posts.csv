@@ -1,0 +1,37 @@
+Date,Post title,Impressions,Clicks,Engagements,Engagement rate,Followers
+2025-10-05,attribution reality check #00,15440,129,455,3.60%,12400
+2025-10-14,attribution reality check #01,10867,161,307,4.97%,12420
+2025-10-23,attribution reality check #02,10681,218,236,3.20%,12440
+2025-11-05,deal scoring teardown #10,14211,123,728,2.10%,12580
+2025-11-14,churn signal breakdown #11,4948,89,261,2.26%,12600
+2025-11-23,churn signal breakdown #12,11814,171,394,5.19%,12620
+2025-12-05,churn signal breakdown #20,6004,86,192,4.41%,12760
+2025-12-14,attribution reality check #21,8252,53,325,5.50%,12780
+2025-12-23,pipeline coverage myth #22,14153,281,833,4.14%,12800
+2026-01-05,churn signal breakdown #30,8763,71,237,2.25%,12940
+2026-01-14,quota planning #31,15960,323,402,5.62%,12960
+2026-01-23,pipeline coverage myth #32,9866,191,390,4.70%,12980
+2026-02-05,churn signal breakdown #40,7270,144,390,4.88%,13120
+2026-02-14,churn signal breakdown #41,15575,279,758,5.61%,13140
+2026-02-23,deal scoring teardown #42,9053,59,325,5.59%,13160
+2026-03-05,forecast accuracy benchmark #50,9753,97,390,4.83%,13300
+2026-03-14,deal scoring teardown #51,5399,81,202,5.05%,13320
+2026-03-23,attribution reality check #52,9491,138,565,3.42%,13340
+2026-04-05,forecast accuracy benchmark #60,14020,279,786,4.76%,13480
+2026-04-14,quota planning #61,14952,229,492,2.27%,13500
+2026-04-23,deal scoring teardown #62,12337,208,481,2.99%,13520
+2026-05-05,revops stack teardown #70,6436,43,281,2.26%,13660
+2026-05-14,churn signal breakdown #71,15612,208,904,4.42%,13680
+2026-05-23,pipeline coverage myth #72,10510,121,438,3.64%,13700
+2026-06-05,quota planning #80,15236,264,766,4.02%,13840
+2026-06-14,forecast accuracy benchmark #81,12061,114,566,4.65%,13860
+2026-06-23,forecast accuracy benchmark #82,5803,67,234,4.36%,13880
+2026-07-05,pipeline coverage myth #90,4368,67,235,2.48%,14020
+2026-07-14,quota planning #91,4515,79,194,2.28%,14040
+2026-07-23,revops stack teardown #92,10508,126,407,4.43%,14060
+2026-08-05,churn signal breakdown #100,5984,56,237,4.09%,14200
+2026-08-14,attribution reality check #101,12530,147,517,4.23%,14220
+2026-08-23,revops stack teardown #102,10399,179,381,3.61%,14240
+2026-09-05,forecast accuracy benchmark #110,11167,109,409,3.21%,14380
+2026-09-14,attribution reality check #111,13385,128,445,2.26%,14400
+2026-09-23,pipeline coverage myth #112,5234,65,148,2.48%,14420

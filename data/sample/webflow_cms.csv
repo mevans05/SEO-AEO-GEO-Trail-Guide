@@ -1,0 +1,29 @@
+Slug,Name,Collection,Published on,Updated on,Author,Word count,Schema
+blog/revenue-forecasting-guide,The Complete Guide to Revenue Forecasting,blog,2024-03-12,2025-02-08,S. Lindqvist,2400,Article
+blog/sales-pipeline-metrics,14 Sales Pipeline Metrics That Actually Predict Revenue,blog,2024-05-20,2025-06-14,S. Lindqvist,1900,Article
+blog/crm-data-hygiene,CRM Data Hygiene: A Practical Playbook,blog,2023-11-02,2024-01-15,S. Lindqvist,1600,Article
+blog/revenue-intelligence-explained,What Is Revenue Intelligence?,blog,2024-01-18,2025-09-01,J. Okafor,2100,Article
+blog/forecast-accuracy-benchmarks,Forecast Accuracy Benchmarks for B2B SaaS,blog,2024-08-09,2025-08-22,M. Reyes,1400,Article
+blog/pipeline-coverage-ratio,Pipeline Coverage Ratio: How Much Is Enough?,blog,2023-09-14,2023-12-01,D. Osei,1200,Article
+blog/sales-velocity-formula,"The Sales Velocity Formula, Explained",blog,2024-02-27,2024-04-11,J. Okafor,1100,Article
+blog/deal-scoring-models,Deal Scoring Models That Sales Teams Actually Use,blog,2024-06-30,2025-05-19,J. Okafor,1750,Article
+blog/revops-tech-stack,Building a RevOps Tech Stack in 2026,blog,2025-01-22,2026-01-30,D. Osei,2600,Article
+blog/churn-prediction-signals,Early Churn Signals Hiding in Your CRM,blog,2024-10-05,2025-03-27,M. Reyes,1500,Article
+blog/quota-attainment-analysis,How to Analyze Quota Attainment,blog,2023-07-19,2023-10-03,D. Osei,980,Article
+blog/conversation-intelligence,Conversation Intelligence: Buyer's Guide,blog,2024-11-14,2025-11-02,D. Osei,2200,Article
+blog/arr-vs-mrr,ARR vs MRR: Which Should You Report?,blog,2023-05-08,2023-06-20,D. Osei,780,Article
+blog/sales-capacity-planning,Sales Capacity Planning Without Guesswork,blog,2025-03-11,2025-12-06,M. Reyes,1350,Article
+blog/attribution-models-b2b,B2B Attribution Models Compared,blog,2024-04-16,2025-07-09,J. Okafor,1850,Article
+compare/clearloop-alternative,The Clearloop Alternative for RevOps Teams,compare,2024-09-03,2025-10-15,M. Reyes,1100,Article
+compare/pipelinehq-vs-vantive,PipelineHQ vs Vantive,compare,2024-12-01,2025-11-20,J. Okafor,950,Article
+compare/revenue-intelligence-tools,12 Revenue Intelligence Tools Compared,compare,2025-02-14,2026-02-01,J. Okafor,2800,Article
+product/forecasting,Revenue Forecasting Software,product,2024-01-10,2026-01-12,S. Lindqvist,900,WebPage
+product/pipeline-analytics,Pipeline Analytics,product,2024-01-10,2025-10-30,M. Reyes,850,WebPage
+product/deal-intelligence,Deal Intelligence,product,2024-01-10,2025-04-18,S. Lindqvist,800,WebPage
+pricing,Pricing,pricing,2024-01-10,2026-03-04,M. Reyes,600,WebPage
+demo,Book a Demo,demo,2024-01-10,2025-12-11,J. Okafor,300,WebPage
+customers/northwind,How Northwind cut forecast error by 41%,customers,2024-07-22,2025-01-09,M. Reyes,1200,WebPage
+customers/acme-logistics,Acme Logistics: 3x pipeline visibility,customers,2025-04-02,2025-08-14,J. Okafor,1150,WebPage
+glossary/pipeline-coverage,Pipeline Coverage (definition),glossary,2024-02-05,2024-02-05,D. Osei,420,WebPage
+glossary/sales-velocity,Sales Velocity (definition),glossary,2024-02-05,2024-02-05,D. Osei,390,WebPage
+glossary/net-revenue-retention,Net Revenue Retention (definition),glossary,2024-02-05,2024-02-05,S. Lindqvist,410,WebPage

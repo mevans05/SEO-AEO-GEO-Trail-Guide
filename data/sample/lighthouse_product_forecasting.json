@@ -1,0 +1,32 @@
+{
+  "requestedUrl": "https://vantive.io/product/forecasting",
+  "finalUrl": "https://vantive.io/product/forecasting",
+  "configSettings": {
+    "formFactor": "mobile"
+  },
+  "categories": {
+    "performance": {
+      "score": 0.44
+    },
+    "seo": {
+      "score": 0.92
+    },
+    "accessibility": {
+      "score": 0.81
+    }
+  },
+  "audits": {
+    "largest-contentful-paint": {
+      "numericValue": 3980.4
+    },
+    "interaction-to-next-paint": {
+      "numericValue": 268.0
+    },
+    "cumulative-layout-shift": {
+      "numericValue": 0.19
+    },
+    "server-response-time": {
+      "numericValue": 640.0
+    }
+  }
+}

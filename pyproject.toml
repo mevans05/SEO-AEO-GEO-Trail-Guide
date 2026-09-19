@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trailguide"
+version = "0.1.0"
+description = "Data-first SEO/AEO/GEO opportunity analysis and revenue-targeted prioritization engine"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0"]
+
+[project.scripts]
+trailguide = "trailguide.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+# Client handover formats and the intake workbook. Kept optional so the engine
+# itself still runs on PyYAML alone, which is what makes it portable.
+deliverables = ["python-docx>=1.1", "python-pptx>=0.6.23", "openpyxl>=3.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["out"]
+
+[tool.ruff.lint]
+# Ruff's defaults: pycodestyle errors and pyflakes. The codebase is kept clean
+# against these, so `ruff check` passing is a meaningful signal.
+select = ["E4", "E7", "E9", "F"]
