@@ -1,0 +1,4 @@
+# Pipeline output - regenerate from data/ rather than committing
+build/
+*.pyc
+__pycache__/

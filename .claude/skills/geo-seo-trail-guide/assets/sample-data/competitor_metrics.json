@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "competitor_domain": "bamboohr.example",
+      "domain_rating": 81,
+      "referring_domains": 14200,
+      "organic_traffic": 890000,
+      "ai_answer_share": 61.4,
+      "notes": "Category leader, heavy review-site presence"
+    },
+    {
+      "competitor_domain": "rippling.example",
+      "domain_rating": 78,
+      "referring_domains": 9800,
+      "organic_traffic": 640000,
+      "ai_answer_share": 48.2,
+      "notes": "Strong paid + PR motion"
+    },
+    {
+      "competitor_domain": "gustohq.example",
+      "domain_rating": 79,
+      "referring_domains": 11500,
+      "organic_traffic": 720000,
+      "ai_answer_share": 52.7,
+      "notes": "Owns payroll informational queries"
+    },
+    {
+      "competitor_domain": "hibob.example",
+      "domain_rating": 68,
+      "referring_domains": 5400,
+      "organic_traffic": 310000,
+      "ai_answer_share": 24.1,
+      "notes": "EMEA-weighted"
+    },
+    {
+      "competitor_domain": "personio.example",
+      "domain_rating": 71,
+      "referring_domains": 6900,
+      "organic_traffic": 402000,
+      "ai_answer_share": 29.8,
+      "notes": "EMEA-weighted, rising"
+    }
+  ]
+}
