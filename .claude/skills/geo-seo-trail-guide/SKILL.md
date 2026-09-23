@@ -53,6 +53,30 @@ landed in the PR section instead of the outreach section will run the plan corre
 
 ## Workflow
 
+### Step 0 - Fetch from Semrush, if that is the source
+
+If the user has a Semrush subscription and no exports on disk, the connector pulls four
+of the five datasets directly. Preview the cost before spending anything, because this
+API bills per row returned:
+
+```bash
+python3 scripts/fetch_semrush.py --brand example.com --dry-run
+python3 scripts/fetch_semrush.py --brand example.com \
+    --competitors rival-a.com,rival-b.com --competitor-backlinks --out-dir ./data
+```
+
+It needs `SEMRUSH_API_KEY` in the environment and `api.semrush.com` permitted by the
+network policy; the client names either problem specifically when it hits one. Never
+accept a key pasted into the conversation - if one arrives that way, say it should be
+rotated and point at the environment's settings instead.
+
+**It cannot fetch citations.** Semrush exposes no public API for AI Visibility Toolkit
+prompt, mention or citation data, so a Semrush-only run has no GEO half and the central
+join in section 2 cannot run. Say this plainly rather than delivering a document that
+looks complete; `references/semrush-connector.md` lists the three ways to close it.
+
+Skip this step entirely when exports are already in `./data`.
+
 ### Step 1 - Take stock of the data
 
 Look at what is in the data directory (`./data` by default) before running anything.
@@ -126,6 +150,7 @@ Work section by section, consulting the reference file for each:
 
 | Section | Reference to read first |
 |---|---|
+| Fetching from Semrush | `references/semrush-connector.md` |
 | §3 Tactical outreach | `references/outreach-playbook.md` |
 | §4 PR and earned media | `references/pr-partnerships.md` |
 | §5 Partnerships and awards | `references/pr-partnerships.md` |
@@ -198,10 +223,14 @@ and generic filler is what makes the rest of the document suspect.
 
 ```
 scripts/
+  fetch_semrush.py   Optional: pull Semrush data straight into ./data (no citations)
+  semrush_api.py     Semrush report registry, request building, response parsing
+  test_semrush.py    Offline tests for the client; no API units, no network
   normalize.py       Map vendor exports onto one schema; reports what it could not place
   analyze.py         Visibility, source graph, tiering, authority, winnability scoring
   render_report.py   Render the factual skeleton with marked slots for judgment
 references/
+  semrush-connector.md Setup, cost control, coverage limits, correcting an endpoint
   intake-schema.md     Canonical schema, per-vendor export steps, partial-data handling
   scoring-models.md    What each score means, how weights are set, when to retune
   outreach-playbook.md Tier-by-tier outreach motions, pitch construction, sequencing

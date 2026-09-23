@@ -2,3 +2,8 @@
 build/
 *.pyc
 __pycache__/
+
+# Never commit API credentials
+.env
+*.key
+secrets.*
