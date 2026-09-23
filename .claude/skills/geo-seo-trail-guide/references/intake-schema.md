@@ -91,6 +91,41 @@ Analytics), Moz Link Explorer, Majestic. For the competitive tier, use Ahrefs Li
 Intersect or Semrush Backlink Gap with the brand and 3–5 rivals, which returns one file
 with multiple target hosts.
 
+### Semrush specifically
+
+The exports worth pulling, in rough order of value:
+
+| Semrush report | Export | Feeds |
+|---|---|---|
+| Backlink Gap | brand + 3–5 rivals | `backlinks` — unlocks the link-gap and displacement tiers |
+| Keyword Gap | brand + 3–5 rivals | `content_gaps` — rival ranks per keyword |
+| Backlink Analytics → Backlinks | brand | `backlinks` — anchors and follow status |
+| Backlink Analytics → Referring Domains | brand | `backlinks` — authority per domain |
+| Organic Research → Positions | brand | `content_gaps` — exact ranks, difficulty, URLs |
+| Domain Overview / bulk analysis | brand + rivals | `authority` |
+| AI Visibility Toolkit | brand | `citations` — **if you can get a prompt-level table out** |
+
+Two things to know about Semrush exports:
+
+**Gap reports are pivoted.** Keyword Gap and Backlink Gap put one column per domain,
+with the cell holding that domain's position or backlink count. The normalizer detects
+this shape and melts it automatically, but it has to know which column is yours. It
+assumes the first — Semrush's convention — and warns when it is guessing. **Pass
+`--brand-domain`**: choosing the wrong column inverts every gap in the file while the
+output still looks entirely plausible.
+
+**Semrush calls its authority metric "ascore",** scoped by context: `Domain ascore` on a
+referring-domain row, `Page ascore` on a backlink row. Both map to `domain_rating`.
+
+Supplying both Keyword Gap and Organic Positions is normal and encouraged — the gap file
+knows what rivals rank for, the positions file knows your exact rank and the URL.
+Overlapping keywords are merged into one row, field by field, so they do not become two
+roadmap entries for one piece of work.
+
+An API connector exists for four of these datasets — see `semrush-connector.md` — but
+it cannot reach the AI Visibility Toolkit, so CSV remains the only route that can carry
+citations.
+
 **Authority and competitors.** Any of the above. Add AI answer share from the citation
 tool if it reports it.
 

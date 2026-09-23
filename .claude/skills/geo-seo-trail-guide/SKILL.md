@@ -53,29 +53,23 @@ landed in the PR section instead of the outreach section will run the plan corre
 
 ## Workflow
 
-### Step 0 - Fetch from Semrush, if that is the source
+### Step 0 - Optional: fetch from Semrush instead of exporting
 
-If the user has a Semrush subscription and no exports on disk, the connector pulls four
-of the five datasets directly. Preview the cost before spending anything, because this
-API bills per row returned:
+CSV exports are the normal path and the one to assume. A Semrush API connector exists
+for unattended re-runs, but it is worth understanding what it does and does not buy you
+before reaching for it:
 
-```bash
-python3 scripts/fetch_semrush.py --brand example.com --dry-run
-python3 scripts/fetch_semrush.py --brand example.com \
-    --competitors rival-a.com,rival-b.com --competitor-backlinks --out-dir ./data
-```
+- It fetches four of the five datasets: authority, competitors, backlinks, content gaps.
+- **It cannot fetch citations.** Semrush exposes no public API for AI Visibility Toolkit
+  prompt, mention or citation data, so an API-only run has no GEO half at all.
+- Hand exports give you those same four datasets with no key, no API units and no
+  network setup - and the AI Visibility data, where it is exportable, only comes out
+  through the UI. So the CSV route is the only one that can ever carry citations.
 
-It needs `SEMRUSH_API_KEY` in the environment and `api.semrush.com` permitted by the
-network policy; the client names either problem specifically when it hits one. Never
-accept a key pasted into the conversation - if one arrives that way, say it should be
-rotated and point at the environment's settings instead.
-
-**It cannot fetch citations.** Semrush exposes no public API for AI Visibility Toolkit
-prompt, mention or citation data, so a Semrush-only run has no GEO half and the central
-join in section 2 cannot run. Say this plainly rather than delivering a document that
-looks complete; `references/semrush-connector.md` lists the three ways to close it.
-
-Skip this step entirely when exports are already in `./data`.
+Use the connector when someone wants this on a schedule without a human clicking Export.
+Otherwise skip it. Setup, cost control and its limits are in
+`references/semrush-connector.md`; always `--dry-run` first, because the API bills per
+row returned.
 
 ### Step 1 - Take stock of the data
 
@@ -102,6 +96,11 @@ its output rather than skimming past it. Two lines matter:
 - **`UNCLASSIFIED` files.** The script could not tell what a file was. Open it, look at
   the headers, and either rename the columns or add the aliases to `SCHEMAS` in
   `scripts/normalize.py`. Never let a file drop silently.
+- **Pivoted gap exports.** Semrush's Keyword Gap and Backlink Gap come out with one
+  column per domain. These are detected and melted automatically, but the normalizer has
+  to know which column is the client's. It assumes the first, which is Semrush's
+  convention, and prints a warning when it is guessing - pass `--brand-domain` to be
+  certain. Getting it wrong inverts every gap in the file while still looking plausible.
 - **`missing:` fields.** A canonical field that found no column. Some are harmless
   (`sentiment` is often absent). Others quietly change conclusions - if `cited_domain`
   is missing from the citation file, the central join has nothing to work with.
@@ -150,7 +149,6 @@ Work section by section, consulting the reference file for each:
 
 | Section | Reference to read first |
 |---|---|
-| Fetching from Semrush | `references/semrush-connector.md` |
 | §3 Tactical outreach | `references/outreach-playbook.md` |
 | §4 PR and earned media | `references/pr-partnerships.md` |
 | §5 Partnerships and awards | `references/pr-partnerships.md` |
@@ -223,21 +221,24 @@ and generic filler is what makes the rest of the document suspect.
 
 ```
 scripts/
-  fetch_semrush.py   Optional: pull Semrush data straight into ./data (no citations)
-  semrush_api.py     Semrush report registry, request building, response parsing
-  test_semrush.py    Offline tests for the client; no API units, no network
   normalize.py       Map vendor exports onto one schema; reports what it could not place
   analyze.py         Visibility, source graph, tiering, authority, winnability scoring
   render_report.py   Render the factual skeleton with marked slots for judgment
 references/
-  semrush-connector.md Setup, cost control, coverage limits, correcting an endpoint
   intake-schema.md     Canonical schema, per-vendor export steps, partial-data handling
   scoring-models.md    What each score means, how weights are set, when to retune
   outreach-playbook.md Tier-by-tier outreach motions, pitch construction, sequencing
   pr-partnerships.md   PR SEO process, campaign patterns, review platforms, awards calendar
   content-roadmap.md   Winnability in practice, brief format, AEO page construction
   deliverable-template.md  Full section-by-section structure and quality bar
-assets/sample-data/  A complete five-file fictional dataset for testing the pipeline
+assets/sample-data/         A complete five-file fictional dataset
+assets/sample-data-semrush/ Real-shape Semrush UI exports, including both wide formats
+
+Optional Semrush API connector (not the default path - see Step 0):
+  scripts/fetch_semrush.py    Pull four datasets straight into ./data; no citations
+  scripts/semrush_api.py      Report registry, request building, response parsing
+  scripts/test_semrush.py     Offline tests; costs no API units, needs no network
+  references/semrush-connector.md  Setup, cost control, coverage limits
 ```
 
 To see the whole pipeline work before pointing it at real data:
